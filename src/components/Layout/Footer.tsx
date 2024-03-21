@@ -21,7 +21,7 @@ const styleForButton = {
 export const Footer = () => {
   return (
     <Stack position={`relative`}>
-      <BackPattern />
+      <BackPattern size={555} />
       <Stack
         bgcolor={`#18BA51`}
         width={1440}

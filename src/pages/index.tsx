@@ -1,7 +1,12 @@
 import { Stack } from "@mui/material";
+import { Home } from "@/components/Home";
 
-const Home = () => {
-  return <Stack></Stack>;
+const HomePage = () => {
+  return (
+    <Stack>
+      <Home />
+    </Stack>
+  );
 };
 
-export default Home;
+export default HomePage;

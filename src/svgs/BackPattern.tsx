@@ -1,12 +1,12 @@
 import { Box } from "@mui/material";
 
-export const BackPattern = () => {
+export const BackPattern = ({ size }: { size: number }) => {
   return (
     <Box position={`absolute`}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width={1440}
-        height={550}
+        width={1540}
+        height={size}
         viewBox="0 0 1440 545"
         fill="none"
       >

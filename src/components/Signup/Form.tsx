@@ -12,7 +12,7 @@ const passwords = [
 ];
 export const Form = () => {
   const handleSubmit = ({ e }: any) => {
-    e.prevent();
+    e.preventDefault();
     const login = {
       name: e.target.Нэр.value,
       email: e.target.email.value,
@@ -21,7 +21,7 @@ export const Form = () => {
     console.log(login);
   };
   return (
-    <Stack component={"form"} onSubmit={handleSubmit} spacing={`25px`}>
+    <Stack onSubmit={handleSubmit} spacing={`25px`}>
       {Inputs.map((val, index) => {
         return (
           <FormControl key={index}>
@@ -87,7 +87,7 @@ export const Form = () => {
         fontSize={14}
       >
         <Checkbox {...label} />
-        Үйлчилгээний нөхцөо зөвшөөрөх
+        Үйлчилгээний нөхцөл зөвшөөрөх
       </Stack>
       <Stack alignItems={`center`} spacing={`25px`}>
         <Button
