@@ -1,4 +1,11 @@
-import { AppBar, Box, MenuItem, Stack, Typography } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Button,
+  MenuItem,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { Logo } from "@/svgs/Logo";
 import { Search } from "@/svgs/Search";
 import { Basket } from "@/svgs/Basket";
@@ -11,24 +18,27 @@ export const Header = () => {
     <AppBar
       sx={{
         backgroundColor: `white`,
-        width: 1210,
         height: 51,
         boxShadow: `none`,
         justifyContent: "center",
       }}
-      position="static"
     >
-      <Stack direction={`row`} alignItems={"center"} spacing={`225px`}>
+      <Stack
+        direction={`row`}
+        alignItems={"center"}
+        spacing={`285px`}
+        justifyContent={`center`}
+      >
         <Stack direction={`row`} spacing={3} alignItems={"center"}>
           <Logo />
           <Stack direction={`row`} spacing={`8px`}>
             {pages.map((page) => {
               return (
-                <MenuItem key={page}>
+                <Button key={page}>
                   <Typography fontSize={14} fontWeight={700} color={"black"}>
                     {page}
                   </Typography>
-                </MenuItem>
+                </Button>
               );
             })}
           </Stack>
@@ -51,12 +61,14 @@ export const Header = () => {
             border={1}
             borderColor="black"
             overflow={"hidden"}
+            py={`14px`}
           >
             <Search />
             <Box
               component={"input"}
               placeholder="Хайх"
-              height={24}
+              height={31}
+              width={`200px`}
               border={`none`}
               fontSize={14}
             ></Box>
@@ -69,18 +81,21 @@ export const Header = () => {
               fontWeight={700}
               spacing={1}
             >
-              <Basket />
-              <Box component={"p"}> Сагс</Box>
+              <MenuItem sx={{ gap: `9px` }}>
+                <Basket />
+                <Typography fontSize={14} fontWeight={700}>
+                  {" "}
+                  Сагс
+                </Typography>
+              </MenuItem>
             </Stack>
-            <Stack
-              direction={`row`}
-              alignItems={"center"}
-              fontSize={14}
-              fontWeight={700}
-              spacing={1}
-            >
-              <UserSvg />
-              <Box component={"p"}> Нэвтрэх</Box>
+            <Stack direction={`row`} alignItems={"center"} spacing={1}>
+              <MenuItem sx={{ gap: `9px` }}>
+                <UserSvg />
+                <Typography fontSize={14} fontWeight={700}>
+                  Нэвтрэх
+                </Typography>
+              </MenuItem>
             </Stack>
           </Stack>
         </Stack>
