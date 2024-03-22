@@ -9,6 +9,7 @@ export const SignupForm = () => {
       height={640}
       alignItems={`center`}
       p={`32px`}
+      mb={10}
     >
       <Typography fontSize={28} fontWeight={600} mb={5}>
         Бүртгүүлэх

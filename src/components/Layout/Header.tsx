@@ -81,7 +81,7 @@ export const Header = () => {
               fontWeight={700}
               spacing={1}
             >
-              <MenuItem sx={{ gap: `9px` }}>
+              <MenuItem sx={{ gap: `9px`, borderRadius: `5px` }}>
                 <Basket />
                 <Typography fontSize={14} fontWeight={700}>
                   {" "}
@@ -90,7 +90,7 @@ export const Header = () => {
               </MenuItem>
             </Stack>
             <Stack direction={`row`} alignItems={"center"} spacing={1}>
-              <MenuItem sx={{ gap: `9px` }}>
+              <MenuItem sx={{ gap: `9px`, borderRadius: `5px` }}>
                 <UserSvg />
                 <Typography fontSize={14} fontWeight={700}>
                   Нэвтрэх

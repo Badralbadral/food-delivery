@@ -3,7 +3,7 @@ import { Home } from "@/components/Home";
 
 const HomePage = () => {
   return (
-    <Stack>
+    <Stack mt={`51px`}>
       <Home />
     </Stack>
   );

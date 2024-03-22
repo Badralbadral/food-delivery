@@ -1,83 +1,88 @@
 import { Hide } from "@/svgs/HIde";
-import { Box, Button, Checkbox, FormControl, Stack } from "@mui/material";
+import { Box, Checkbox, Input, Stack } from "@mui/material";
+import { useState } from "react";
+import { Inputs, passwords } from "@/utils/dummy-Data";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
-const Inputs = [
-  { label: "Нэр", placeholder: "Нэрээ оруулна уу" },
-  { label: "И-мэйл", placeholder: "И-мэйл хаягаа оруулна уу" },
-  { label: "Хаяг", placeholder: "Та хаягаа оруулна уу" },
-];
-const passwords = [
-  { label: "Нууц үг", placeholder: "Нууц үгээ оруулна уу" },
-  { label: "Нууц үг давтах", placeholder: "Нууц үгээ оруулна уу" },
-];
+
 export const Form = () => {
-  const handleSubmit = ({ e }: any) => {
+  const [hide, setHide] = useState<boolean>(false);
+
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     const login = {
       name: e.target.Нэр.value,
-      email: e.target.email.value,
+      email: e.target.Имэйл.value,
       address: e.target.Хаяг.value,
+      passwords: e.target.password.value,
+      rePasswords: e.target.rePassword.value,
     };
-    console.log(login);
+    console.log("🚀 ~ handleSubmit ~ login:", login);
+  };
+
+  const styleForInputBtn = {
+    height: 32,
+    width: 320,
+    fontSize: 14,
+    backgroundColor: `#18BA51`,
+    boxShadow: `none`,
+    py: `19px`,
+    color: `white`,
+    borderRadius: 4,
   };
   return (
-    <Stack onSubmit={handleSubmit} spacing={`25px`}>
+    <form onSubmit={handleSubmit}>
       {Inputs.map((val, index) => {
         return (
-          <FormControl key={index}>
-            <Stack htmlFor={`${val.label}`} fontSize={14} component={"label"}>
-              {val.label}
-              <Box
-                mt={`4px`}
-                borderRadius={`4px`}
-                border={`1px solid`}
-                borderColor={`#ECEDF0`}
-                bgcolor={`#F7F7F8`}
-                height={32}
-                py={`16px`}
-                px={2}
-                component={"input"}
-                required
-                placeholder={`${val.placeholder}`}
-                name={`${val.label}`}
-                id={`${val.label}`}
-              ></Box>
-            </Stack>
-          </FormControl>
+          <Stack key={index} fontSize={14} component={"label"} mb={`25px`}>
+            {val.label}
+            <Box
+              type={val.label == "Имэйл" ? "email" : "text"}
+              name={val.label}
+              mt={`4px`}
+              borderRadius={`4px`}
+              border={`1px solid`}
+              borderColor={`#ECEDF0`}
+              bgcolor={`#F7F7F8`}
+              width={320}
+              height={32}
+              py={`16px`}
+              px={2}
+              component={"input"}
+              placeholder={val.placeholder}
+            ></Box>
+          </Stack>
         );
       })}
       {passwords.map((val, index) => {
         return (
-          <FormControl key={index}>
-            <Stack htmlFor={`${val.label}`} fontSize={14} component={"label"}>
-              {val.label}
-              <Stack
-                mt={`4px`}
-                borderRadius={`4px`}
-                border={`1px solid`}
-                borderColor={`#ECEDF0`}
+          <Stack key={index} fontSize={14} component={"label"} mb={`25px`}>
+            {val.label}
+            <Stack
+              mt={`4px`}
+              borderRadius={`4px`}
+              border={`1px solid`}
+              borderColor={`#ECEDF0`}
+              bgcolor={`#F7F7F8`}
+              width={320}
+              height={32}
+              px={2}
+              direction={`row`}
+              alignItems={`center`}
+              justifyContent={`space-between`}
+            >
+              <Box
+                type={`${hide ? "password" : "text"}`}
+                name={val.name}
+                border={`none`}
                 bgcolor={`#F7F7F8`}
                 height={32}
-                px={2}
-                direction={`row`}
-                alignItems={`center`}
-                justifyContent={`space-between`}
-              >
-                <Box
-                  border={`none`}
-                  bgcolor={`#F7F7F8`}
-                  width={240}
-                  height={32}
-                  component={"input"}
-                  placeholder={`${val.placeholder}`}
-                  required
-                  name={`${val.label}`}
-                  id={`${val.label}`}
-                ></Box>
-                <Hide />
-              </Stack>
+                component={"input"}
+                placeholder={val.placeholder}
+                width={250}
+              ></Box>
+              <Hide clickFunc={setHide} value={hide} />
             </Stack>
-          </FormControl>
+          </Stack>
         );
       })}
       <Stack
@@ -85,26 +90,19 @@ export const Form = () => {
         alignItems={`center`}
         component={"label"}
         fontSize={14}
+        mb={`25px`}
       >
         <Checkbox {...label} />
         Үйлчилгээний нөхцөл зөвшөөрөх
       </Stack>
       <Stack alignItems={`center`} spacing={`25px`}>
-        <Button
-          sx={{
-            height: 32,
-            width: 320,
-            fontSize: 11,
-            bgcolor: `#18BA51`,
-            boxShadow: `none`,
-            py: `19px`,
-          }}
-          variant="contained"
+        <Input
+          disableUnderline
           type="submit"
-        >
-          Бүртгүүлэх
-        </Button>
+          value={" Бүртгүүлэх"}
+          style={styleForInputBtn}
+        />
       </Stack>
-    </Stack>
+    </form>
   );
 };

@@ -1,7 +1,10 @@
 import { Box, Input, Stack, Typography } from "@mui/material";
 import { Hide } from "@/svgs/HIde";
+import { useState } from "react";
+import { passwords } from "@/utils/dummy-Data";
 
 export const StepTree = () => {
+  const [hide, setHide] = useState<boolean>(false);
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const login = {
@@ -33,60 +36,40 @@ export const StepTree = () => {
         Шинэ нууц үг зохиох
       </Typography>
       <form onSubmit={handleSubmit}>
-        <Stack fontSize={14} component={"label"} mb={`25px`}>
-          Нууц үг
-          <Stack
-            mt={`4px`}
-            borderRadius={`4px`}
-            border={`1px solid`}
-            borderColor={`#ECEDF0`}
-            bgcolor={`#F7F7F8`}
-            width={320}
-            height={32}
-            px={2}
-            direction={`row`}
-            alignItems={`center`}
-            justifyContent={`space-between`}
-          >
-            <Box
-              name="password"
-              border={`none`}
-              bgcolor={`#F7F7F8`}
-              height={32}
-              component={"input"}
-              placeholder="*********"
-            ></Box>
-            <Hide />
-          </Stack>
-        </Stack>
-        <Stack fontSize={14} component={"label"} mb={`25px`}>
-          Нууц үг давтах
-          <Stack
-            mt={`4px`}
-            borderRadius={`4px`}
-            border={`1px solid`}
-            borderColor={`#ECEDF0`}
-            bgcolor={`#F7F7F8`}
-            width={320}
-            height={32}
-            px={2}
-            direction={`row`}
-            alignItems={`center`}
-            justifyContent={`space-between`}
-          >
-            <Box
-              name="rePassword"
-              border={`none`}
-              bgcolor={`#F7F7F8`}
-              height={32}
-              component={"input"}
-              placeholder="*********"
-            ></Box>
-            <Hide />
-          </Stack>
-        </Stack>
+        {passwords.map((val, index) => {
+          return (
+            <Stack key={index} fontSize={14} component={"label"} mb={`25px`}>
+              {val.label}
+              <Stack
+                mt={`4px`}
+                borderRadius={`4px`}
+                border={`1px solid`}
+                borderColor={`#ECEDF0`}
+                bgcolor={`#F7F7F8`}
+                width={320}
+                height={32}
+                px={2}
+                direction={`row`}
+                alignItems={`center`}
+                justifyContent={`space-between`}
+              >
+                <Box
+                  type={`${hide ? "password" : "text"}`}
+                  name={val.name}
+                  border={`none`}
+                  bgcolor={`#F7F7F8`}
+                  height={32}
+                  component={"input"}
+                  placeholder="*********"
+                ></Box>
+                <Hide clickFunc={setHide} value={hide} />
+              </Stack>
+            </Stack>
+          );
+        })}
         <Stack alignItems={`center`} spacing={`25px`}>
           <Input
+            disableUnderline
             type="submit"
             value={"Үргэлжлүүлэх"}
             style={styleForInputBtn}

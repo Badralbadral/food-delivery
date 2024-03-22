@@ -50,6 +50,7 @@ export const StepOne = () => {
         </Stack>
         <Stack alignItems={`center`} spacing={`25px`}>
           <Input
+            disableUnderline
             type="submit"
             value={"Үргэлжлүүлэх"}
             style={styleForInputBtn}

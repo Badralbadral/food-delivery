@@ -1,10 +1,12 @@
 import { Stack } from "@mui/material";
-import { HeroBanner } from "./HeroBanner";
+import { HeroBanner, ControlCards, FoodCards } from ".";
 
 export const Home = () => {
   return (
-    <Stack width={1440} height={788}>
+    <Stack width={1440} alignItems={`center`} spacing={`122px`}>
       <HeroBanner />
+      <ControlCards />
+      <FoodCards />
     </Stack>
   );
 };

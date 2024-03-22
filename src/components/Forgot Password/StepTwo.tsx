@@ -1,7 +1,9 @@
 import { Box, Input, Stack, Typography } from "@mui/material";
 import { Hide } from "@/svgs/HIde";
+import { useState } from "react";
 
 export const StepTwo = () => {
+  const [hide, setHide] = useState<boolean>(false);
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const login = {
@@ -55,6 +57,7 @@ export const StepTwo = () => {
             justifyContent={`space-between`}
           >
             <Box
+              type={`${hide ? "password" : "text"}`}
               name="fourDigits"
               border={`none`}
               bgcolor={`#F7F7F8`}
@@ -62,12 +65,13 @@ export const StepTwo = () => {
               component={"input"}
               placeholder="*********"
             ></Box>
-            <Hide />
+            <Hide clickFunc={setHide} value={hide} />
           </Stack>
         </Stack>
 
         <Stack alignItems={`center`} spacing={`25px`}>
           <Input
+            disableUnderline
             type="submit"
             value={"Үргэлжлүүлэх"}
             style={styleForInputBtn}

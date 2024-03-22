@@ -1,6 +1,17 @@
-export const Hide = () => {
+import { Dispatch } from "react";
+
+export const Hide = ({
+  clickFunc,
+  value,
+}: {
+  clickFunc: Dispatch<React.SetStateAction<boolean>>;
+  value: boolean;
+}) => {
   return (
     <svg
+      onClick={() => {
+        clickFunc(!value);
+      }}
       xmlns="http://www.w3.org/2000/svg"
       width={22}
       height={22}

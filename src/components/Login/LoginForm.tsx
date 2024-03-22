@@ -1,7 +1,10 @@
 import { Box, Button, Input, Stack, Typography } from "@mui/material";
 import { Hide } from "@/svgs/HIde";
+import { useState } from "react";
 
 export const LoginForm = () => {
+  const [hide, setHide] = useState<boolean>(false);
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const login = {
@@ -21,6 +24,7 @@ export const LoginForm = () => {
     color: `white`,
     borderRadius: 4,
   };
+
   return (
     <Stack
       borderRadius={`16px`}
@@ -36,6 +40,7 @@ export const LoginForm = () => {
         <Stack fontSize={14} component={"label"} mb={`25px`}>
           Имэйл
           <Box
+            type="email"
             name="email"
             mt={`4px`}
             borderRadius={`4px`}
@@ -66,14 +71,16 @@ export const LoginForm = () => {
             justifyContent={`space-between`}
           >
             <Box
+              type={`${hide ? "password" : "text"}`}
               name="password"
               border={`none`}
               bgcolor={`#F7F7F8`}
               height={32}
               component={"input"}
               placeholder="Нууц үг"
+              width={250}
             ></Box>
-            <Hide />
+            <Hide clickFunc={setHide} value={hide} />
           </Stack>
         </Stack>
         <Typography
@@ -87,8 +94,12 @@ export const LoginForm = () => {
           Нууц үг сэргээх
         </Typography>
         <Stack alignItems={`center`} spacing={`25px`}>
-          <Input type="submit" value={"Нэвтрэх"} style={styleForInputBtn} />
-
+          <Input
+            disableUnderline
+            type="submit"
+            value={"Нэвтрэх"}
+            style={styleForInputBtn}
+          />
           <Typography fontSize={14}>Эсвэл</Typography>
           <Button
             sx={{
