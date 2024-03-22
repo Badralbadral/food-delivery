@@ -19,7 +19,7 @@ export const ControlCards = () => {
         return (
           <Stack
             key={index}
-            width={264.7}
+            width={264.9}
             height={145}
             pt={`25px`}
             px={`16px`}

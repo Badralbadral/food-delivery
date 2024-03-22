@@ -1,9 +1,11 @@
 import { Box, Button, Input, Stack, Typography } from "@mui/material";
 import { Hide } from "@/svgs/HIde";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 export const LoginForm = () => {
   const [hide, setHide] = useState<boolean>(false);
+  const router = useRouter();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -113,6 +115,7 @@ export const LoginForm = () => {
               color: `#272727`,
             }}
             variant="contained"
+            onClick={() => router.push("/signup")}
           >
             Бүртгүүлэх
           </Button>

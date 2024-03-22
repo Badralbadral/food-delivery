@@ -34,7 +34,7 @@ export const Header = () => {
           <Stack direction={`row`} spacing={`8px`}>
             {pages.map((page) => {
               return (
-                <Button key={page}>
+                <Button href="/" key={page}>
                   <Typography fontSize={14} fontWeight={700} color={"black"}>
                     {page}
                   </Typography>
@@ -89,14 +89,14 @@ export const Header = () => {
                 </Typography>
               </MenuItem>
             </Stack>
-            <Stack direction={`row`} alignItems={"center"} spacing={1}>
-              <MenuItem sx={{ gap: `9px`, borderRadius: `5px` }}>
+            <Button href="/login" sx={{ gap: `9px`, borderRadius: `5px` }}>
+              <Stack direction={`row`} alignItems={"center"} spacing={1}>
                 <UserSvg />
-                <Typography fontSize={14} fontWeight={700}>
+                <Typography fontSize={13} fontWeight={700} color={"black"}>
                   Нэвтрэх
                 </Typography>
-              </MenuItem>
-            </Stack>
+              </Stack>
+            </Button>
           </Stack>
         </Stack>
       </Stack>
