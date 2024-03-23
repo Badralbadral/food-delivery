@@ -1,6 +1,9 @@
-import { Box, Modal, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { SaleSvg } from "@/svgs/Sale";
 import { useState } from "react";
+import { CardModal } from "./CardModal";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+
 type FoodType = {
   foodName: string;
   price: number;
@@ -8,35 +11,57 @@ type FoodType = {
   salePrice: number;
 };
 
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-export const Card = ({ title, data }: { title: string; data: FoodType[] }) => {
-  const [open, setOpen] = useState(false);
+export const Card = ({
+  title,
+  data,
+}: {
+  title: string;
+  data: Array<FoodType>;
+}) => {
+  const [open, setOpen] = useState<boolean>(false);
+  const [selected, setSelected] = useState<number>(0);
 
   function handleModal() {
     setOpen(!open);
   }
   return (
     <Stack width={1200} height={344} spacing={`22px`}>
-      <Stack direction={`row`} height={32} alignItems={`center`}>
-        <SaleSvg />
-        <Typography fontWeight={700} fontSize={22}>
-          {title}
-        </Typography>
+      <Stack
+        direction={`row`}
+        height={32}
+        alignItems={`center`}
+        justifyContent={`space-between`}
+      >
+        <Stack direction={`row`} alignItems={`center`}>
+          <SaleSvg />
+          <Typography fontWeight={700} fontSize={22}>
+            {title}
+          </Typography>
+        </Stack>
+        <Stack
+          direction={`row`}
+          alignItems={`center`}
+          spacing={`11px`}
+          sx={{ ":hover": { textDecoration: `underline` } }}
+          color={`#18BA51`}
+        >
+          <Typography fontSize={15}>Бүгдийг харах</Typography>
+          <ArrowForwardIosIcon sx={{ fontSize: 16 }} />
+        </Stack>
       </Stack>
-      <Stack onClick={handleModal} direction={`row`} spacing={`14px`}>
+      <Stack direction={`row`} spacing={`14px`}>
         {data.map((val, index) => {
           return (
-            <Stack key={index} width={303} height={256}>
+            <Stack
+              onClick={() => {
+                handleModal();
+                setSelected(index);
+              }}
+              key={index}
+              width={303}
+              height={256}
+              position={`relative`}
+            >
               <Box
                 component={"img"}
                 src="breakFast.png"
@@ -46,43 +71,40 @@ export const Card = ({ title, data }: { title: string; data: FoodType[] }) => {
                 right={9}
                 boxShadow={"0px 3px 6px -2px rgba(0, 0, 0, 0.10),"}
               ></Box>
-              <Typography fontSize={18} fontWeight={600} mt={`4px`}>
+              <Box
+                top={17}
+                left={205}
+                position={`absolute`}
+                border={`1px solid white`}
+                fontSize={15}
+                fontWeight={600}
+                width={`57px`}
+                height={`26px`}
+                bgcolor={`#18BA51`}
+                color={`white`}
+                px={`14px`}
+                py={`4px`}
+                borderRadius={`16px`}
+              >
+                20%
+              </Box>
+              <Typography fontSize={18} fontWeight={600}>
                 {val.foodName}
               </Typography>
               <Stack direction={`row`} spacing={`16px`}>
                 <Typography color={`#18BA51`}>
-                  {val.price}
-                  {val.currency}
-                </Typography>
-                <Typography sx={{ textDecoration: `line-through` }}>
                   {val.salePrice}
                   {val.currency}
                 </Typography>
+                <Typography sx={{ textDecoration: `line-through` }}>
+                  {val.price}
+                  {val.currency}
+                </Typography>
               </Stack>
-              <Modal
-                open={open}
-                onClose={handleModal}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-                sx={{ backgroundColor: `transparent` }}
-              >
-                <Box sx={style}>
-                  <Typography
-                    id="modal-modal-title"
-                    variant="h6"
-                    component="h2"
-                  >
-                    Text in a modal
-                  </Typography>
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Duis mollis, est non commodo luctus, nisi erat porttitor
-                    ligula.
-                  </Typography>
-                </Box>
-              </Modal>
             </Stack>
           );
         })}
+        <CardModal stateVal={open} func={handleModal} data={data[selected]} />
       </Stack>
     </Stack>
   );

@@ -14,20 +14,17 @@ export const passwords = [
 ];
 
 export const controlCards = [
-  {
-    title: "Хүргэлтийн төлөв хянах",
-    desc: "Захиалга бэлтгэлийн явцыг хянах",
-  },
+  { title: "Хүргэлтийн төлөв хянах", desc: "Захиалга бэлтгэлийн явцыг хянах" },
   { title: "Шуурхай хүргэлт", desc: "Захиалга бэлтгэлийн явцыг хянах" },
   { title: "Эрүүл, баталгаат орц", desc: "Захиалга бэлтгэлийн явцыг хянах" },
   { title: "Хоолны өргөн сонголт", desc: "Захиалга бэлтгэлийн явцыг хянах" },
 ];
 
 export const sales = [
-  { foodName: "Өглөөний хоол", price: 14800, currency: "₮", salePrice: 16800 },
-  { foodName: "Зайрмаг", price: 4800, currency: "₮", salePrice: 6800 },
-  { foodName: "Өглөөний хоол", price: 24800, currency: "₮", salePrice: 26800 },
-  { foodName: "Breakfast", price: 24800, currency: "₮", salePrice: 26800 },
+  { foodName: "Өглөөний хоол", salePrice: 14800, currency: "₮", price: 16800 },
+  { foodName: "Зайрмаг", salePrice: 4800, currency: "₮", price: 6800 },
+  { foodName: "Өглөөний хоол", salePrice: 24800, currency: "₮", price: 26800 },
+  { foodName: "Breakfast", salePrice: 24800, currency: "₮", price: 26800 },
 ];
 
 export const mainFoods = [
