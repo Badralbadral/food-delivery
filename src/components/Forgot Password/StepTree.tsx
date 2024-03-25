@@ -1,7 +1,7 @@
 import { Box, Input, Stack, Typography } from "@mui/material";
 import { Hide } from "@/svgs/HIde";
 import { useState } from "react";
-import { passwords } from "@/utils/dummy-Data";
+import { NewPassword } from "@/utils/dummy-data";
 
 export const StepTree = () => {
   const [hide, setHide] = useState<boolean>(false);
@@ -36,7 +36,7 @@ export const StepTree = () => {
         Шинэ нууц үг зохиох
       </Typography>
       <form onSubmit={handleSubmit}>
-        {passwords.map((val, index) => {
+        {NewPassword.map((val, index) => {
           return (
             <Stack key={index} fontSize={14} component={"label"} mb={`25px`}>
               {val.label}
@@ -54,6 +54,7 @@ export const StepTree = () => {
                 justifyContent={`space-between`}
               >
                 <Box
+                  sx={{ ":focus": { outline: "none" } }}
                   type={`${hide ? "password" : "text"}`}
                   name={val.name}
                   border={`none`}

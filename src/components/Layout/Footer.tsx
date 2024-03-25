@@ -24,7 +24,7 @@ export const Footer = () => {
       <BackPattern size={555} />
       <Stack
         bgcolor={`#18BA51`}
-        width={1440}
+        width={`100%`}
         height={545}
         color={`white`}
         alignItems={"center"}
@@ -52,7 +52,13 @@ export const Footer = () => {
                   textDecoration: "underline",
                 }}
                 key={index}
-                href="/"
+                href={
+                  val == "Нүүр"
+                    ? "/"
+                    : val == "Хүргэлтийн бүс"
+                    ? "/del-area"
+                    : "/"
+                }
               >
                 {val}
               </Button>

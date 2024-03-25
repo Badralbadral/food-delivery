@@ -36,6 +36,7 @@ export const Form = () => {
           <Stack key={index} fontSize={14} component={"label"} mb={`25px`}>
             {val.label}
             <Box
+              sx={{ ":focus": { outline: "none" } }}
               type={val.label == "Имэйл" ? "email" : "text"}
               name={val.label}
               mt={`4px`}
@@ -71,6 +72,7 @@ export const Form = () => {
               justifyContent={`space-between`}
             >
               <Box
+                sx={{ ":focus": { outline: "none" } }}
                 type={`${hide ? "password" : "text"}`}
                 name={val.name}
                 border={`none`}

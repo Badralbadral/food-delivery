@@ -1,15 +1,9 @@
-import {
-  AppBar,
-  Box,
-  Button,
-  MenuItem,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { AppBar, Box, Button, Stack, Typography } from "@mui/material";
 import { Logo } from "@/svgs/Logo";
 import { Search } from "@/svgs/Search";
-import { Basket } from "@/svgs/Basket";
 import { UserSvg } from "@/svgs/UserSvg";
+import React from "react";
+import { DrawerBasket } from "./DrawerBasket";
 
 const pages = ["НҮҮР", "ХООЛНЫ ЦЭС", "ХҮРГЭЛТИЙН БҮС"];
 
@@ -21,12 +15,13 @@ export const Header = () => {
         height: 51,
         boxShadow: `none`,
         justifyContent: "center",
+        minWidth: 1250,
       }}
     >
       <Stack
         direction={`row`}
         alignItems={"center"}
-        spacing={`285px`}
+        spacing={`315px`}
         justifyContent={`center`}
       >
         <Stack direction={`row`} spacing={3} alignItems={"center"}>
@@ -34,7 +29,16 @@ export const Header = () => {
           <Stack direction={`row`} spacing={`8px`}>
             {pages.map((page) => {
               return (
-                <Button href="/" key={page}>
+                <Button
+                  href={
+                    page == "НҮҮР"
+                      ? "/"
+                      : page == "ХҮРГЭЛТИЙН БҮС"
+                      ? "/del-area"
+                      : "/"
+                  }
+                  key={page}
+                >
                   <Typography fontSize={14} fontWeight={700} color={"black"}>
                     {page}
                   </Typography>
@@ -65,6 +69,7 @@ export const Header = () => {
           >
             <Search />
             <Box
+              sx={{ ":focus": { outline: "none" } }}
               component={"input"}
               placeholder="Хайх"
               height={31}
@@ -74,21 +79,7 @@ export const Header = () => {
             ></Box>
           </Stack>
           <Stack direction={`row`} spacing={4}>
-            <Stack
-              direction={`row`}
-              alignItems={"center"}
-              fontSize={14}
-              fontWeight={700}
-              spacing={1}
-            >
-              <MenuItem sx={{ gap: `9px`, borderRadius: `5px` }}>
-                <Basket />
-                <Typography fontSize={14} fontWeight={700}>
-                  {" "}
-                  Сагс
-                </Typography>
-              </MenuItem>
-            </Stack>
+            <DrawerBasket />
             <Button href="/login" sx={{ gap: `9px`, borderRadius: `5px` }}>
               <Stack direction={`row`} alignItems={"center"} spacing={1}>
                 <UserSvg />

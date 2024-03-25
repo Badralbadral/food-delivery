@@ -31,10 +31,11 @@ export const CardModal = ({
 
   const styleObj = {
     backgroundColor: "#18BA51",
-    width: 10,
+    width: 40,
     height: 40,
     fontSize: 19,
     fontWeight: 900,
+    color: `white`,
   };
   return (
     <Modal
@@ -138,6 +139,7 @@ export const CardModal = ({
                 py: `8px`,
                 px: `16px`,
                 mt: 3,
+                color: `white`,
               }}
               variant="contained"
             >

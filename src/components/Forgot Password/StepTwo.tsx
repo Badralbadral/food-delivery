@@ -57,6 +57,7 @@ export const StepTwo = () => {
             justifyContent={`space-between`}
           >
             <Box
+              sx={{ ":focus": { outline: "none" } }}
               type={`${hide ? "password" : "text"}`}
               name="fourDigits"
               border={`none`}

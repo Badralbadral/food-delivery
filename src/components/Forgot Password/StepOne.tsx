@@ -34,6 +34,7 @@ export const StepOne = () => {
         <Stack fontSize={14} component={"label"} mb={`25px`}>
           Имэйл
           <Box
+            sx={{ ":focus": { outline: "none" } }}
             name="email"
             mt={`4px`}
             borderRadius={`4px`}

@@ -42,6 +42,7 @@ export const LoginForm = () => {
         <Stack fontSize={14} component={"label"} mb={`25px`}>
           Имэйл
           <Box
+            sx={{ ":focus": { outline: "none" } }}
             type="email"
             name="email"
             mt={`4px`}
@@ -73,6 +74,7 @@ export const LoginForm = () => {
             justifyContent={`space-between`}
           >
             <Box
+              sx={{ ":focus": { outline: "none" } }}
               type={`${hide ? "password" : "text"}`}
               name="password"
               border={`none`}
@@ -85,16 +87,19 @@ export const LoginForm = () => {
             <Hide clickFunc={setHide} value={hide} />
           </Stack>
         </Stack>
-        <Typography
-          bottom={12}
-          position={`relative`}
-          left={`210px`}
-          fontSize={`14px`}
-          color={`#3F4145`}
-          mt={2}
+        <Button
+          href="/forgot-pass"
+          sx={{
+            color: `#3F4145`,
+            position: `relative`,
+            bottom: 12,
+            left: 200,
+            fontSize: 11,
+            mt: 2,
+          }}
         >
           Нууц үг сэргээх
-        </Typography>
+        </Button>
         <Stack alignItems={`center`} spacing={`25px`}>
           <Input
             disableUnderline
