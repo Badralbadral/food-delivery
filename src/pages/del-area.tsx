@@ -1,13 +1,15 @@
 import { SaleSvg } from "@/svgs/Sale";
 import { Box, Divider, Stack, Typography, useTheme } from "@mui/material";
 import { Area } from "@/utils/dummy-data";
+import dynamic from "next/dynamic";
+const Map = dynamic(() => import("@/components/Map"), { ssr: false });
 
 const DelArea = () => {
   const theme = useTheme();
   return (
     <Stack>
       <Box mt={`61px`} mb={`50px`}>
-        <img src="map.png"></img>
+        <Map />
       </Box>
       <Stack
         mb={`78px`}

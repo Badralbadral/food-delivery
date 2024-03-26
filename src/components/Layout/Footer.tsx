@@ -38,26 +38,28 @@ export const Footer = () => {
             Food Delivery
           </Box>
         </Stack>
-        <Stack
-          direction={`row`}
-          fontSize={16}
-          fontWeight={590}
-          spacing={`69px`}
-        >
+        <Stack direction={`row`} fontWeight={590} spacing={`81px`}>
           {pages.map((val, index) => {
             return (
               <Button
                 sx={{
+                  fontSize: 16,
+                  textTransform: `none`,
                   color: "white",
                   textDecoration: "underline",
+                  textUnderlineOffset: `4px`,
                 }}
                 key={index}
                 href={
                   val == "Нүүр"
                     ? "/"
+                    : val == "Хоолны цэс"
+                    ? "/menu"
+                    : val == "Үйлчилгээний нөхцөл"
+                    ? "/terms"
                     : val == "Хүргэлтийн бүс"
                     ? "/del-area"
-                    : "/"
+                    : "/privacy-policy"
                 }
               >
                 {val}

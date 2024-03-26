@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import { controlCards } from "@/utils/dummy-Data";
+import { controlCards } from "@/utils/dummy-data";
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 import WatchLaterOutlinedIcon from "@mui/icons-material/WatchLaterOutlined";
 import SpaOutlinedIcon from "@mui/icons-material/SpaOutlined";
@@ -15,7 +15,7 @@ export const ControlCards = () => {
       alignItems={`center`}
       spacing={`47px`}
     >
-      {controlCards?.map((val, index) => {
+      {controlCards.map((val, index) => {
         return (
           <Stack
             key={index}

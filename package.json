@@ -20,13 +20,16 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-unicorn": "^51.0.1",
     "jsonc-eslint-parser": "^2.4.0",
+    "leaflet": "^1.9.4",
     "next": "14.1.4",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-leaflet": "^4.2.1",
     "styled-components": "^6.1.8",
     "typescript-eslint": "^7.3.1"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.9.8",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

@@ -63,3 +63,5 @@ export const Area = [
   "Хоймор хотхон ",
   "Хоймор хотхон ",
 ];
+
+export const MenuBtns = ["Breakfast", "Soup", "Main Course", "Dessert"];

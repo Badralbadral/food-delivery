@@ -43,10 +43,10 @@ export const DrawerBasket = () => {
           <Button onClick={toggleDrawer(`right`, false)}>
             <ArrowBackIosIcon
               onClick={toggleDrawer(`right`, false)}
-              sx={{ position: `relative`, right: 180, color: `black` }}
+              sx={{ position: `relative`, right: 150, color: `black` }}
             />
           </Button>
-          <Typography fontSize={20} fontWeight={900}>
+          <Typography pr={8} fontSize={20} fontWeight={900}>
             Таны сагс
           </Typography>
         </Stack>
@@ -93,9 +93,10 @@ export const DrawerBasket = () => {
     >
       <Button
         sx={{
+          textTransform: `none`,
           gap: `9px`,
           borderRadius: `5px`,
-          fontSize: 14,
+          fontSize: 15,
           fontWeight: 700,
           color: `black`,
         }}

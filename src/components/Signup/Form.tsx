@@ -1,7 +1,7 @@
 import { Hide } from "@/svgs/HIde";
 import { Box, Checkbox, Input, Stack } from "@mui/material";
 import { useState } from "react";
-import { Inputs, passwords } from "@/utils/dummy-Data";
+import { Inputs, passwords } from "@/utils/dummy-data";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 export const Form = () => {

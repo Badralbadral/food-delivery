@@ -1,4 +1,11 @@
-import { AppBar, Box, Button, Stack, Typography } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Button,
+  Stack,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { Logo } from "@/svgs/Logo";
 import { Search } from "@/svgs/Search";
 import { UserSvg } from "@/svgs/UserSvg";
@@ -8,6 +15,7 @@ import { DrawerBasket } from "./DrawerBasket";
 const pages = ["НҮҮР", "ХООЛНЫ ЦЭС", "ХҮРГЭЛТИЙН БҮС"];
 
 export const Header = () => {
+  const theme = useTheme();
   return (
     <AppBar
       sx={{
@@ -26,26 +34,31 @@ export const Header = () => {
       >
         <Stack direction={`row`} spacing={3} alignItems={"center"}>
           <Logo />
-          <Stack direction={`row`} spacing={`8px`}>
-            {pages.map((page) => {
-              return (
-                <Button
-                  href={
-                    page == "НҮҮР"
-                      ? "/"
-                      : page == "ХҮРГЭЛТИЙН БҮС"
-                      ? "/del-area"
-                      : "/"
-                  }
-                  key={page}
-                >
-                  <Typography fontSize={14} fontWeight={700} color={"black"}>
-                    {page}
-                  </Typography>
-                </Button>
-              );
-            })}
-          </Stack>
+          {pages.map((page) => {
+            return (
+              <Button
+                sx={{
+                  fontSize: 14,
+                  fontWeight: 700,
+                  color: `black`,
+                  ":focus": {
+                    bgcolor: `white`,
+                    color: theme.palette.primary.main,
+                  },
+                }}
+                href={
+                  page == "НҮҮР"
+                    ? "/"
+                    : page == "ХООЛНЫ ЦЭС"
+                    ? "/menu"
+                    : "/del-area"
+                }
+                key={page}
+              >
+                {page}
+              </Button>
+            );
+          })}
         </Stack>
         <Stack
           direction={`row`}
@@ -80,10 +93,13 @@ export const Header = () => {
           </Stack>
           <Stack direction={`row`} spacing={4}>
             <DrawerBasket />
-            <Button href="/login" sx={{ gap: `9px`, borderRadius: `5px` }}>
+            <Button
+              href="/login"
+              sx={{ gap: `9px`, borderRadius: `5px`, textTransform: `none` }}
+            >
               <Stack direction={`row`} alignItems={"center"} spacing={1}>
                 <UserSvg />
-                <Typography fontSize={13} fontWeight={700} color={"black"}>
+                <Typography fontSize={15} fontWeight={700} color={"black"}>
                   Нэвтрэх
                 </Typography>
               </Stack>
