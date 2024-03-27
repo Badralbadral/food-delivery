@@ -15,10 +15,7 @@ export const passwords = [
 
 export const NewPassword = [
   { label: "Нууц үг", name: "password" },
-  {
-    label: "Нууц үг давтах",
-    name: "rePassword",
-  },
+  { label: "Нууц үг давтах", name: "rePassword" },
 ];
 
 export const controlCards = [
@@ -26,32 +23,6 @@ export const controlCards = [
   { title: "Шуурхай хүргэлт", desc: "Захиалга бэлтгэлийн явцыг хянах" },
   { title: "Эрүүл, баталгаат орц", desc: "Захиалга бэлтгэлийн явцыг хянах" },
   { title: "Хоолны өргөн сонголт", desc: "Захиалга бэлтгэлийн явцыг хянах" },
-];
-
-export const sales = [
-  { foodName: "Өглөөний хоол", salePrice: 14800, currency: "₮", price: 16800 },
-  { foodName: "Зайрмаг", salePrice: 4800, currency: "₮", price: 6800 },
-  { foodName: "Өглөөний хоол", salePrice: 24800, currency: "₮", price: 26800 },
-  { foodName: "Breakfast", salePrice: 24800, currency: "₮", price: 26800 },
-];
-
-export const mainFoods = [
-  { foodName: "", price: 0, currency: "₮", salePrice: 0 },
-  { foodName: "", price: 0, currency: "₮", salePrice: 0 },
-  { foodName: "", price: 0, currency: "₮", salePrice: 0 },
-  { foodName: "", price: 0, currency: "₮", salePrice: 0 },
-];
-export const salads = [
-  { foodName: "", price: 0, currency: "₮", salePrice: 0 },
-  { foodName: "", price: 0, currency: "₮", salePrice: 0 },
-  { foodName: "", price: 0, currency: "₮", salePrice: 0 },
-  { foodName: "", price: 0, currency: "₮", salePrice: 0 },
-];
-export const desert = [
-  { foodName: "", price: 0, currency: "₮", salePrice: 0 },
-  { foodName: "", price: 0, currency: "₮", salePrice: 0 },
-  { foodName: "", price: 0, currency: "₮", salePrice: 0 },
-  { foodName: "", price: 0, currency: "₮", salePrice: 0 },
 ];
 
 export const Area = [

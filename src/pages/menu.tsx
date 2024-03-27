@@ -1,6 +1,12 @@
 import { MenuBody } from "@/components/Menu";
 
+import { Stack } from "@mui/material";
+
 const Menu = () => {
-  return <MenuBody />;
+  return (
+    <Stack>
+      <MenuBody />
+    </Stack>
+  );
 };
 export default Menu;

@@ -14,7 +14,7 @@ type FoodType = {
   stock: number;
   sale: number;
 };
-export const Card = ({
+export const SaleCard = ({
   title,
   data,
 }: {
@@ -28,35 +28,31 @@ export const Card = ({
     setOpen(!open);
   }
   return (
-    <Stack width={1200} height={`fit-content`} spacing={`22px`}>
-      {title == "" ? (
-        ""
-      ) : (
+    <Stack width={1200} height={344} spacing={`22px`}>
+      <Stack
+        direction={`row`}
+        height={32}
+        alignItems={`center`}
+        justifyContent={`space-between`}
+      >
+        <Stack direction={`row`} alignItems={`center`}>
+          <SaleSvg />
+          <Typography fontWeight={700} fontSize={22}>
+            {title}
+          </Typography>
+        </Stack>
         <Stack
           direction={`row`}
-          height={32}
           alignItems={`center`}
-          justifyContent={`space-between`}
+          spacing={`11px`}
+          sx={{ ":hover": { textDecoration: `underline` } }}
+          color={`#18BA51`}
         >
-          <Stack direction={`row`} alignItems={`center`} spacing={1}>
-            <SaleSvg />
-            <Typography fontWeight={700} fontSize={22}>
-              {title}
-            </Typography>
-          </Stack>
-          <Stack
-            direction={`row`}
-            alignItems={`center`}
-            spacing={`11px`}
-            sx={{ ":hover": { textDecoration: `underline` } }}
-            color={`#18BA51`}
-          >
-            <Typography fontSize={15}>Бүгдийг харах</Typography>
-            <ArrowForwardIosIcon sx={{ fontSize: 16 }} />
-          </Stack>
+          <Typography fontSize={15}>Бүгдийг харах</Typography>
+          <ArrowForwardIosIcon sx={{ fontSize: 16 }} />
         </Stack>
-      )}
-      <Stack direction={`row`} flexWrap={`wrap`} width={1290}>
+      </Stack>
+      <Stack direction={`row`} spacing={`14px`}>
         {data.slice(0, 4).map((val, index) => {
           return (
             <Stack
@@ -79,11 +75,31 @@ export const Card = ({
                 right={9}
                 boxShadow={"0px 3px 6px -2px rgba(0, 0, 0, 0.10),"}
               ></Box>
-              <Stack mt={1.4}>
-                <Typography fontSize={18} fontWeight={600}>
-                  {val.foodName}
-                </Typography>
+              <Box
+                top={17}
+                left={205}
+                position={`absolute`}
+                border={`1px solid white`}
+                fontSize={15}
+                fontWeight={600}
+                width={`57px`}
+                height={`26px`}
+                bgcolor={`#18BA51`}
+                color={`white`}
+                px={`14px`}
+                py={`4px`}
+                borderRadius={`16px`}
+              >
+                {val.sale}%
+              </Box>
+              <Typography fontSize={18} fontWeight={600} mt={2}>
+                {val.foodName}
+              </Typography>
+              <Stack direction={`row`} spacing={`16px`}>
                 <Typography color={`#18BA51`}>{val.price}₮</Typography>
+                <Typography sx={{ textDecoration: `line-through` }}>
+                  {val.price}₮
+                </Typography>
               </Stack>
             </Stack>
           );

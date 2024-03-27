@@ -2,10 +2,14 @@ import { Box, Button, Modal, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import { Close } from "@/svgs/Close";
 type ObjType = {
+  id: number;
+  category: string;
   foodName: string;
-  price: number;
-  currency: string;
-  salePrice: number;
+  price: string;
+  imagePath: string;
+  ingredients: string[];
+  stock: number;
+  sale: number;
 };
 export const CardModal = ({
   stateVal,
@@ -28,59 +32,39 @@ export const CardModal = ({
     borderRadius: `16px`,
     p: 4,
   };
-
   const styleObj = {
     backgroundColor: "#18BA51",
-    width: 40,
     height: 40,
     fontSize: 19,
     fontWeight: 900,
     color: `white`,
   };
   return (
-    <Modal
-      open={stateVal}
-      aria-labelledby={`modal-modal-title`}
-      aria-describedby={`modal-modal-description`}
-      sx={{ backgroundColor: `transparent` }}
-    >
+    <Modal open={stateVal} sx={{ backgroundColor: `transparent` }}>
       <Stack
         direction={`row`}
         alignItems={`center`}
         spacing={`33px`}
         sx={style}
       >
-        <Stack width={500} height={500} bgcolor={`gray`}></Stack>
+        <Box
+          width={500}
+          height={500}
+          component={"img"}
+          src={data.imagePath}
+        ></Box>
         <Stack height={410} spacing={`32px`}>
           <Stack position={`relative`}>
             <Close prop={func} />
-            <Typography
-              fontSize={28}
-              fontWeight={700}
-              id={`modal-modal-title`}
-              variant="h6"
-              component="h2"
-            >
+            <Typography fontSize={28} fontWeight={700} id={`modal-modal-title`}>
               {data.foodName}
             </Typography>
-            <Typography
-              id={`modal-modal-description`}
-              fontSize={18}
-              fontWeight={600}
-              color={`#18BA51`}
-            >
-              {data.price}
-              {data.currency}
+            <Typography fontSize={18} fontWeight={600} color={`#18BA51`}>
+              {data.price}₮
             </Typography>
           </Stack>
           <Stack spacing={`12px`}>
-            <Typography
-              fontSize={18}
-              fontWeight={700}
-              id={`modal-modal-title`}
-              variant="h6"
-              component="h2"
-            >
+            <Typography fontSize={18} fontWeight={700} id={`modal-modal-title`}>
               Орц
             </Typography>
             <Box
@@ -92,17 +76,11 @@ export const CardModal = ({
               p={`8px`}
               fontSize={16}
             >
-              Хулуу, төмс, лууван , сонгино, цөцгийн тос, самрын үр
+              {data.ingredients}
             </Box>
           </Stack>
           <Stack spacing={`32px`}>
-            <Typography
-              fontSize={18}
-              fontWeight={700}
-              id={`modal-modal-title`}
-              variant="h6"
-              component="h2"
-            >
+            <Typography fontSize={18} fontWeight={700} id={`modal-modal-title`}>
               Тоо
             </Typography>
             <Stack
@@ -115,7 +93,6 @@ export const CardModal = ({
                   setQuantity(quantity >= 1 ? quantity - 1 : quantity)
                 }
                 sx={styleObj}
-                variant="contained"
               >
                 -
               </Button>
@@ -124,9 +101,10 @@ export const CardModal = ({
               </Typography>
 
               <Button
-                onClick={() => setQuantity(quantity + 1)}
+                onClick={() =>
+                  setQuantity(data.stock <= quantity ? quantity : quantity + 1)
+                }
                 sx={styleObj}
-                variant="contained"
               >
                 +
               </Button>
@@ -135,13 +113,8 @@ export const CardModal = ({
               sx={{
                 bgcolor: `#18BA51`,
                 height: 40,
-                borderRadius: `4px`,
-                py: `8px`,
-                px: `16px`,
-                mt: 3,
                 color: `white`,
               }}
-              variant="contained"
             >
               Сагслах
             </Button>

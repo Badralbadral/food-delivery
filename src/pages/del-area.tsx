@@ -6,6 +6,7 @@ const Map = dynamic(() => import("@/components/Map"), { ssr: false });
 
 const DelArea = () => {
   const theme = useTheme();
+  const area = ["А бүс", " Б бүс"];
   return (
     <Stack>
       <Box mt={`61px`} mb={`50px`}>
@@ -25,32 +26,38 @@ const DelArea = () => {
         </Typography>
       </Stack>
       <Stack direction={`row`} spacing={`72px`}>
-        <Stack position={`relative`} left={19} width={540}>
-          <Typography fontSize={20} fontWeight={590}>
-            А бүс
-          </Typography>
-          <Divider sx={{ bgcolor: theme.palette.primary.main, my: `16px` }} />
-          <Stack spacing={`16px`}>
-            {Area.map((val, index) => {
-              return (
-                <Typography fontWeight={400} key={index}>
-                  {val}
-                </Typography>
-              );
-            })}
-          </Stack>
-        </Stack>
-        <Stack position={`relative`} left={19} width={540}>
-          <Typography fontSize={20} fontWeight={590}>
-            Б бүс
-          </Typography>
-          <Divider sx={{ bgcolor: theme.palette.primary.main, my: `16px` }} />
-          <Stack spacing={`16px`}>
-            {Area.map((val, index) => {
-              return <Typography key={index}>{val}</Typography>;
-            })}
-          </Stack>
-        </Stack>
+        {area.map((val, index) => {
+          return (
+            <Stack key={index} position={`relative`} left={19} width={540}>
+              <Typography fontSize={20} fontWeight={590}>
+                {val}
+              </Typography>
+              <Divider
+                sx={{ bgcolor: theme.palette.primary.main, my: `16px` }}
+              />
+              <Stack direction={`row`} spacing={20}>
+                <Stack spacing={`16px`}>
+                  {Area.map((val, index) => {
+                    return (
+                      <Typography fontWeight={400} key={index}>
+                        {val}
+                      </Typography>
+                    );
+                  })}
+                </Stack>
+                <Stack spacing={`16px`}>
+                  {Area.map((val, index) => {
+                    return (
+                      <Typography fontWeight={400} key={index}>
+                        {val}
+                      </Typography>
+                    );
+                  })}
+                </Stack>
+              </Stack>
+            </Stack>
+          );
+        })}
       </Stack>
     </Stack>
   );

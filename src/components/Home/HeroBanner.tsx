@@ -4,7 +4,7 @@ import { Box, Stack, Typography } from "@mui/material";
 export const HeroBanner = () => {
   return (
     <Stack height={788}>
-      <BackPattern size={710} />
+      <BackPattern size={790} />
       <Stack
         width={1440}
         height={788}

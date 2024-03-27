@@ -6,9 +6,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { Logo } from "@/svgs/Logo";
-import { Search } from "@/svgs/Search";
-import { UserSvg } from "@/svgs/UserSvg";
+import { Logo, Search, UserSvg } from "@/svgs";
 import React from "react";
 import { DrawerBasket } from "./DrawerBasket";
 
