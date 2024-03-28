@@ -35,4 +35,70 @@ export const Area = [
   "Хоймор хотхон ",
 ];
 
-export const MenuBtns = ["Breakfast", "Soup", "Main Course", "Dessert"];
+export const MenuBtns = [
+  "Breakfast",
+  "Salads and Appetizers",
+  "Main Course",
+  "Dessert",
+];
+export const styleOne = {
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  height: 564,
+  width: 981,
+  bgcolor: "background.paper",
+  borderRadius: `16px`,
+  p: 4,
+};
+export const styleObj = {
+  backgroundColor: "#18BA51",
+  height: 40,
+  fontSize: 19,
+  fontWeight: 900,
+  color: `white`,
+};
+export const styleForNum = {
+  color: `black`,
+  border: `none`,
+  height: 20,
+  fontSize: 18,
+  fontWeight: 600,
+  backgroundColor: `white`,
+  textDecoration: `line-through`,
+};
+export const styleForSaleNum = {
+  color: `#18BA51`,
+  border: `none`,
+  height: 20,
+  fontSize: 18,
+  fontWeight: 600,
+  width: 75,
+};
+export const styleForCards = {
+  color: `#18BA51`,
+  border: `none`,
+  height: 20,
+  fontSize: 16,
+  fontWeight: 600,
+  backgroundColor: `white`,
+};
+
+export const styleForSCard = {
+  color: `black`,
+  border: `none`,
+  height: 20,
+  fontSize: 17,
+  textDecoration: `line-through`,
+  width: 75,
+  fontWeight: 600,
+};
+export const styleForSaleCards = {
+  color: `#18BA51`,
+  border: `none`,
+  height: 20,
+  fontSize: 17,
+  width: 75,
+  fontWeight: 600,
+};

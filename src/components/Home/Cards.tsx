@@ -4,7 +4,7 @@ import { useState } from "react";
 import { CardModal } from "./CardModal";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { NumericFormat } from "react-number-format";
-import { styleForSCard, styleForSaleCards } from "@/utils/dummy-data";
+import { styleForCards } from "@/utils/dummy-data";
 type FoodType = {
   id: number;
   category: string;
@@ -15,7 +15,7 @@ type FoodType = {
   stock: number;
   sale: number;
 };
-export const SaleCard = ({
+export const Card = ({
   title,
   data,
 }: {
@@ -24,16 +24,16 @@ export const SaleCard = ({
 }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<number>(0);
+
   return (
-    <Stack width={1210} height={344} spacing={`22px`}>
+    <Stack width={1170} height={`fit-content`} spacing={`22px`}>
       <Stack
         direction={`row`}
         height={32}
         alignItems={`center`}
         justifyContent={`space-between`}
-        ml={10}
       >
-        <Stack direction={`row`} alignItems={`center`}>
+        <Stack direction={`row`} alignItems={`center`} spacing={1}>
           <SaleSvg />
           <Typography fontWeight={700} fontSize={22}>
             {title}
@@ -52,7 +52,7 @@ export const SaleCard = ({
           <ArrowForwardIosIcon sx={{ fontSize: 16 }} />
         </Button>
       </Stack>
-      <Stack direction={`row`} spacing={`14px`}>
+      <Stack direction={`row`} flexWrap={`wrap`} width={1290}>
         {data.slice(0, 4).map((val, index) => {
           return (
             <Stack
@@ -73,46 +73,21 @@ export const SaleCard = ({
                 height={186}
                 position={`relative`}
                 right={9}
-                mb={2}
                 boxShadow={
-                  " 0px 3px 6px -2px rgba(0, 0, 0, 0.10), 0px 6px 10px 0px rgba(0, 0, 0, 0.07)"
+                  "0px 3px 6px -2px rgba(0, 0, 0, 0.10), 0px 6px 10px 0px rgba(0, 0, 0, 0.07)"
                 }
               ></Box>
-              <Box
-                top={17}
-                left={205}
-                position={`absolute`}
-                border={`1px solid white`}
-                fontSize={15}
-                fontWeight={600}
-                width={`57px`}
-                height={`26px`}
-                bgcolor={`#18BA51`}
-                color={`white`}
-                px={`14px`}
-                py={`4px`}
-                borderRadius={`16px`}
-              >
-                {val.sale}%
-              </Box>
-              <Stack spacing={0.6}>
-                <Typography fontSize={18} fontWeight={600} mt={2}>
+              <Stack mt={1.4}>
+                <Typography fontSize={18} fontWeight={600}>
                   {val.foodName}
                 </Typography>
-                <Stack direction={`row`} alignItems={`center`}>
-                  <NumericFormat
-                    style={styleForSaleCards}
-                    value={`${val.price - (val.price * val.sale) / 100}`}
-                    thousandSeparator=","
-                    suffix="₮"
-                  />
-                  <NumericFormat
-                    style={styleForSCard}
-                    value={`${val.price}`}
-                    thousandSeparator=","
-                    suffix="₮"
-                  />
-                </Stack>
+                <NumericFormat
+                  style={styleForCards}
+                  value={`${val.price}`}
+                  thousandSeparator=","
+                  suffix="₮"
+                  disabled
+                />
               </Stack>
             </Stack>
           );

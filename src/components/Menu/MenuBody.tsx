@@ -1,12 +1,11 @@
 import { Button, Stack, useTheme } from "@mui/material";
 import { MenuBtns } from "@/utils/dummy-data";
-import { Card } from "../Home/Card";
 import foodData from "@/dummy.json";
 import { useState } from "react";
+import { MenuCards } from "./MenuCards";
 export const MenuBody = () => {
   const theme = useTheme();
   const [category, setCategory] = useState("Breakfast");
-
   return (
     <Stack
       height={`fit-content`}
@@ -41,10 +40,9 @@ export const MenuBody = () => {
         })}
       </Stack>
       <Stack>
-        <Card
-          title=""
+        <MenuCards
           data={foodData.filter((val) => {
-            return val.category == category && val.sale == 0;
+            return val.category == category;
           })}
         />
       </Stack>

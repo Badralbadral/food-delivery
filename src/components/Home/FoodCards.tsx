@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material";
 import { SaleCard } from "@/components/Home/index";
-import { Card } from "./Card";
+import { Card } from "./Cards";
 import foodData from "@/dummy.json";
 
 export const FoodCards = () => {

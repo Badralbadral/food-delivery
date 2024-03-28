@@ -1,11 +1,17 @@
 import { Box, Button, Modal, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import { Close } from "@/svgs/Close";
+import { NumericFormat } from "react-number-format";
+import {
+  styleOne,
+  styleObj,
+  styleForNum,
+  styleForSaleNum,
+} from "@/utils/dummy-data";
 type ObjType = {
-  id: number;
   category: string;
   foodName: string;
-  price: string;
+  price: number;
   imagePath: string;
   ingredients: string[];
   stock: number;
@@ -21,31 +27,13 @@ export const CardModal = ({
   data: ObjType;
 }) => {
   const [quantity, setQuantity] = useState<number>(1);
-  const style = {
-    position: "absolute" as "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    height: 564,
-    width: 981,
-    bgcolor: "background.paper",
-    borderRadius: `16px`,
-    p: 4,
-  };
-  const styleObj = {
-    backgroundColor: "#18BA51",
-    height: 40,
-    fontSize: 19,
-    fontWeight: 900,
-    color: `white`,
-  };
   return (
     <Modal open={stateVal} sx={{ backgroundColor: `transparent` }}>
       <Stack
         direction={`row`}
         alignItems={`center`}
         spacing={`33px`}
-        sx={style}
+        sx={styleOne}
       >
         <Box
           width={500}
@@ -56,12 +44,38 @@ export const CardModal = ({
         <Stack height={410} spacing={`32px`}>
           <Stack position={`relative`}>
             <Close prop={func} />
-            <Typography fontSize={28} fontWeight={700} id={`modal-modal-title`}>
+            <Typography
+              fontSize={28}
+              fontWeight={700}
+              mb={0.5}
+              id={`modal-modal-title`}
+            >
               {data.foodName}
             </Typography>
-            <Typography fontSize={18} fontWeight={600} color={`#18BA51`}>
-              {data.price}₮
-            </Typography>
+            {data.sale > 0 ? (
+              <Stack direction={`row`} alignItems={`center`} spacing={2}>
+                <NumericFormat
+                  style={styleForSaleNum}
+                  value={`${data.price - (data.price * data.sale) / 100}`}
+                  thousandSeparator=","
+                  suffix="₮"
+                />
+                <NumericFormat
+                  style={styleForNum}
+                  value={`${data.price}`}
+                  thousandSeparator=","
+                  suffix="₮"
+                />
+              </Stack>
+            ) : (
+              <NumericFormat
+                style={styleForSaleNum}
+                value={`${data.price - (data.price * data.sale) / 100}`}
+                thousandSeparator=","
+                suffix="₮"
+                disabled
+              />
+            )}
           </Stack>
           <Stack spacing={`12px`}>
             <Typography fontSize={18} fontWeight={700} id={`modal-modal-title`}>
