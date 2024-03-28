@@ -41,6 +41,12 @@ export const MenuBtns = [
   "Main Course",
   "Dessert",
 ];
+export const styleForDrawerCardBtn = {
+  backgroundColor: `#18BA51`,
+  color: `white`,
+  width: `30px`,
+  height: `30px`,
+};
 export const styleOne = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -76,6 +82,14 @@ export const styleForSaleNum = {
   fontWeight: 600,
   width: 75,
 };
+export const styleForDrawer = {
+  color: `black`,
+  border: `none`,
+  height: 20,
+  fontSize: 17,
+  fontWeight: 700,
+  backgroundColor: `white`,
+};
 export const styleForCards = {
   color: `#18BA51`,
   border: `none`,
@@ -102,3 +116,11 @@ export const styleForSaleCards = {
   width: 75,
   fontWeight: 600,
 };
+type BasketType = {
+  foodName: string;
+  price: number;
+  ingredients: Array<string>;
+  quantity: number;
+  img: string;
+};
+export const DrawerCardsArr: BasketType[] = [];

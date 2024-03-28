@@ -1,36 +1,17 @@
 import { Basket } from "@/svgs/Basket";
-import {
-  Box,
-  Button,
-  Divider,
-  Drawer,
-  Stack,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Box, Button, Divider, Drawer, Stack, Typography } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import React from "react";
-type Anchor = "right";
-
+import { NumericFormat } from "react-number-format";
+import {
+  styleForDrawer,
+  styleForDrawerCardBtn,
+  DrawerCardsArr,
+} from "@/utils/dummy-data";
 export const DrawerBasket = () => {
-  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const [state, setState] = React.useState({
-    right: false,
-  });
-
-  const toggleDrawer = (anchor: Anchor, newOpen: boolean) => () => {
-    setOpen(newOpen);
-    setState({ ...state, [anchor]: open });
-  };
-
   const DrawerList = (
-    <Box
-      sx={{
-        width: 546,
-      }}
-      role="presentation"
-    >
+    <Stack width={546} height={`100%`} role="presentation">
       <Stack>
         <Stack
           my={`15px`}
@@ -40,9 +21,9 @@ export const DrawerBasket = () => {
           width={538}
           height={48}
         >
-          <Button onClick={toggleDrawer(`right`, false)}>
+          <Button onClick={() => setOpen(false)}>
             <ArrowBackIosIcon
-              onClick={toggleDrawer(`right`, false)}
+              onClick={() => setOpen(false)}
               sx={{ position: `relative`, right: 150, color: `black` }}
             />
           </Button>
@@ -50,9 +31,55 @@ export const DrawerBasket = () => {
             Таны сагс
           </Typography>
         </Stack>
-        <Divider sx={{ mb: `15px` }} />
+        <Divider sx={{ mb: `10px` }} />
       </Stack>
-      <Stack height={172}>
+      <Stack width={546} height={`100%`}>
+        {DrawerCardsArr.map((val, index) => {
+          return (
+            <Stack key={index}>
+              <Stack
+                direction={`row`}
+                width={538}
+                height={182}
+                spacing={`16px`}
+                justifyContent={`center`}
+                alignItems={`center`}
+              >
+                <Box
+                  component="img"
+                  src={`${val.img}`}
+                  width={245}
+                  height={150}
+                  bgcolor={`gray`}
+                ></Box>
+                <Stack width={245} height={150}>
+                  <Typography fontSize={18} fontWeight={600}>
+                    {val.foodName}
+                  </Typography>
+                  <Typography fontSize={18} fontWeight={600} color={`#18BA51`}>
+                    {val.price}
+                  </Typography>
+                  <Stack width={245} color={`#767676`} mb={1}>
+                    {val.ingredients}
+                  </Stack>
+                  <Stack
+                    direction={`row`}
+                    width={151}
+                    justifyContent={`space-between`}
+                    alignItems={`center`}
+                  >
+                    <Button style={styleForDrawerCardBtn}>-</Button>
+                    {val.quantity}
+                    <Button style={styleForDrawerCardBtn}>+</Button>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Divider />
+            </Stack>
+          );
+        })}
+      </Stack>
+      <Stack height={122}>
         <Divider sx={{ mb: `15px` }} />
         <Stack
           direction={`row`}
@@ -64,13 +91,17 @@ export const DrawerBasket = () => {
             <Typography color={`#5E6166`} fontSize={18}>
               Нийт төлөх дүн
             </Typography>
-            <Typography fontSize={18} fontWeight={700}>
-              34,800₮
-            </Typography>
+            <NumericFormat
+              style={styleForDrawer}
+              value="34,800"
+              thousandSeparator=","
+              suffix="₮"
+              disabled
+            />
           </Stack>
           <Button
             sx={{
-              bgcolor: theme.palette.primary.main,
+              bgcolor: `#18BA51`,
               width: 256,
               height: 48,
               color: `white`,
@@ -81,7 +112,7 @@ export const DrawerBasket = () => {
           </Button>
         </Stack>
       </Stack>
-    </Box>
+    </Stack>
   );
   return (
     <Stack
@@ -89,7 +120,6 @@ export const DrawerBasket = () => {
       alignItems={"center"}
       fontSize={14}
       fontWeight={700}
-      spacing={1}
     >
       <Button
         sx={{
@@ -100,7 +130,7 @@ export const DrawerBasket = () => {
           fontWeight: 700,
           color: `black`,
         }}
-        onClick={toggleDrawer(`right`, true)}
+        onClick={() => setOpen(true)}
       >
         <Basket />
         Сагс

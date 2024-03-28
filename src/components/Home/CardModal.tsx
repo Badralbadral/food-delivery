@@ -7,6 +7,7 @@ import {
   styleObj,
   styleForNum,
   styleForSaleNum,
+  DrawerCardsArr,
 } from "@/utils/dummy-data";
 type ObjType = {
   category: string;
@@ -16,6 +17,14 @@ type ObjType = {
   ingredients: string[];
   stock: number;
   sale: number;
+};
+type BasketType = {
+  foodName: string;
+  price: number;
+  ingredients: Array<string>;
+  quantity: number;
+  img: string;
+  stock: number;
 };
 export const CardModal = ({
   stateVal,
@@ -27,8 +36,17 @@ export const CardModal = ({
   data: ObjType;
 }) => {
   const [quantity, setQuantity] = useState<number>(1);
+  const [basketData, setBasketData] = useState<BasketType>({
+    foodName: data.foodName,
+    price: data.price,
+    ingredients: data.ingredients,
+    quantity: quantity,
+    img: data.imagePath,
+    stock: data.stock,
+  });
+  setBasketData;
   return (
-    <Modal open={stateVal} sx={{ backgroundColor: `transparent` }}>
+    <Modal open={stateVal}>
       <Stack
         direction={`row`}
         alignItems={`center`}
@@ -44,12 +62,7 @@ export const CardModal = ({
         <Stack height={410} spacing={`32px`}>
           <Stack position={`relative`}>
             <Close prop={func} />
-            <Typography
-              fontSize={28}
-              fontWeight={700}
-              mb={0.5}
-              id={`modal-modal-title`}
-            >
+            <Typography fontSize={28} fontWeight={700} mb={0.5}>
               {data.foodName}
             </Typography>
             {data.sale > 0 ? (
@@ -78,7 +91,7 @@ export const CardModal = ({
             )}
           </Stack>
           <Stack spacing={`12px`}>
-            <Typography fontSize={18} fontWeight={700} id={`modal-modal-title`}>
+            <Typography fontSize={18} fontWeight={700}>
               Орц
             </Typography>
             <Box
@@ -94,7 +107,7 @@ export const CardModal = ({
             </Box>
           </Stack>
           <Stack spacing={`32px`}>
-            <Typography fontSize={18} fontWeight={700} id={`modal-modal-title`}>
+            <Typography fontSize={18} fontWeight={700}>
               Тоо
             </Typography>
             <Stack
@@ -124,6 +137,10 @@ export const CardModal = ({
               </Button>
             </Stack>
             <Button
+              onClick={() => {
+                DrawerCardsArr.push(basketData);
+                console.log(DrawerCardsArr);
+              }}
               sx={{
                 bgcolor: `#18BA51`,
                 height: 40,
