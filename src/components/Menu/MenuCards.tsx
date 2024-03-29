@@ -15,13 +15,6 @@ type FoodType = {
 export const MenuCards = ({ data }: { data: Array<FoodType> }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<number>(0);
-  const styleForNum = {
-    color: `#18BA51`,
-    border: `none`,
-    height: 20,
-    fontSize: 16,
-    backgroundColor: `white`,
-  };
   const sortedData = data.sort((a, b) => {
     return b.sale - a.sale;
   });
@@ -93,7 +86,7 @@ export const MenuCards = ({ data }: { data: Array<FoodType> }) => {
                   </Stack>
                 ) : (
                   <NumericFormat
-                    style={styleForNum}
+                    style={styleForSaleCards}
                     value={`${val.price}`}
                     thousandSeparator=","
                     suffix="₮"

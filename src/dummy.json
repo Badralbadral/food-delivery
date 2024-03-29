@@ -85,7 +85,14 @@
     "foodName": "Sushi Roll",
     "price": 34800,
     "imagePath": " https://img.freepik.com/premium-photo/mouthwatering-sushi-rolls-stock-photos-foodies_960396-203.jpg ",
-    "ingredients": ["Sushi Rice", "Seafood or Vegetables", "Nori", "Soy Sauce"],
+    "ingredients": [
+      "Sushi",
+      "Rice",
+      "Seafood",
+      "Vegetables",
+      "Nori",
+      "Soy_Sauce"
+    ],
     "stock": 20,
     "sale": 20
   },

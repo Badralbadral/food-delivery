@@ -1,1 +1,2 @@
-export * from "@/components/Verification & Address";
+export * from "@/components/Verification & Address/CheckBoxCont";
+export * from "@/components/Verification & Address/SelectBox";

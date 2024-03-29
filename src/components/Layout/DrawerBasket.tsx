@@ -1,99 +1,68 @@
 import { Basket } from "@/svgs/Basket";
-import { Box, Button, Divider, Drawer, Stack, Typography } from "@mui/material";
+import { Button, Divider, Drawer, Stack, Typography } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import React from "react";
 import { NumericFormat } from "react-number-format";
-import {
-  styleForDrawer,
-  styleForDrawerCardBtn,
-  DrawerCardsArr,
-} from "@/utils/dummy-data";
+import { styleForDrawer, DrawerCardsArr } from "@/utils/dummy-data";
+import { DarwerCard } from "./DrawerCard";
 export const DrawerBasket = () => {
   const [open, setOpen] = React.useState(false);
+  let p = 0;
+  let total = 0;
+  DrawerCardsArr.map((value) => {
+    if (value.sale > 0) {
+      p = value.price - (value.price * value.sale) / 100;
+    } else {
+      p = value.price;
+    }
+    total += p * value.count;
+  });
   const DrawerList = (
-    <Stack width={546} height={`100%`} role="presentation">
-      <Stack>
+    <Stack width={546} height={`102%`} role="presentation">
+      <Stack zIndex={1000} bgcolor={`white`} position={`fixed`}>
         <Stack
-          my={`15px`}
           direction={`row`}
           justifyContent={`center`}
           alignItems={`center`}
           width={538}
-          height={48}
+          height={58}
         >
-          <Button onClick={() => setOpen(false)}>
-            <ArrowBackIosIcon
-              onClick={() => setOpen(false)}
-              sx={{ position: `relative`, right: 150, color: `black` }}
-            />
-          </Button>
+          <ArrowBackIosIcon
+            onClick={() => setOpen(false)}
+            sx={{ position: `relative`, right: 150, color: `black` }}
+          />
           <Typography pr={8} fontSize={20} fontWeight={900}>
             Таны сагс
           </Typography>
         </Stack>
-        <Divider sx={{ mb: `10px` }} />
+        <Divider />
       </Stack>
-      <Stack width={546} height={`100%`}>
+      <Stack width={546} height={`100%`} mt={8} zIndex={100}>
         {DrawerCardsArr.map((val, index) => {
           return (
             <Stack key={index}>
-              <Stack
-                direction={`row`}
-                width={538}
-                height={182}
-                spacing={`16px`}
-                justifyContent={`center`}
-                alignItems={`center`}
-              >
-                <Box
-                  component="img"
-                  src={`${val.img}`}
-                  width={245}
-                  height={150}
-                  bgcolor={`gray`}
-                ></Box>
-                <Stack width={245} height={150}>
-                  <Typography fontSize={18} fontWeight={600}>
-                    {val.foodName}
-                  </Typography>
-                  <Typography fontSize={18} fontWeight={600} color={`#18BA51`}>
-                    {val.price}
-                  </Typography>
-                  <Stack width={245} color={`#767676`} mb={1}>
-                    {val.ingredients}
-                  </Stack>
-                  <Stack
-                    direction={`row`}
-                    width={151}
-                    justifyContent={`space-between`}
-                    alignItems={`center`}
-                  >
-                    <Button style={styleForDrawerCardBtn}>-</Button>
-                    {val.quantity}
-                    <Button style={styleForDrawerCardBtn}>+</Button>
-                  </Stack>
-                </Stack>
-              </Stack>
-              <Divider />
+              <DarwerCard data={val} />
             </Stack>
           );
         })}
       </Stack>
       <Stack height={122}>
-        <Divider sx={{ mb: `15px` }} />
+        <Divider />
         <Stack
+          bgcolor={`white`}
+          zIndex={1000}
           direction={`row`}
           justifyContent={`space-between`}
           px={`32px`}
-          py={`10px`}
+          pt={`17px`}
         >
-          <Stack>
+          <Stack mt={0.6}>
             <Typography color={`#5E6166`} fontSize={18}>
               Нийт төлөх дүн
             </Typography>
             <NumericFormat
               style={styleForDrawer}
-              value="34,800"
+              value={total}
               thousandSeparator=","
               suffix="₮"
               disabled
@@ -103,9 +72,7 @@ export const DrawerBasket = () => {
             sx={{
               bgcolor: `#18BA51`,
               width: 256,
-              height: 48,
               color: `white`,
-              fontSize: 14,
             }}
           >
             Захиалах
