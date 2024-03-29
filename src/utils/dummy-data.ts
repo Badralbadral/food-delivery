@@ -128,3 +128,12 @@ type BasketType = {
 };
 
 export const DrawerCardsArr: BasketType[] = [];
+export const styleForAddFoodModalBox = {
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 587,
+  bgcolor: "background.paper",
+  borderRadius: `16px`,
+};
