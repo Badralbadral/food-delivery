@@ -1,6 +1,6 @@
 import { Box, Button, Modal, Stack, Typography } from "@mui/material";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import React from "react";
+import React, { useState } from "react";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
 const style = {
@@ -15,9 +15,16 @@ const style = {
 };
 
 export const CategoryModal = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [open, setOpen] = useState(false);
+  const [newCategoryName, setNewCategoryName] = useState<string>("");
+
+  const handleCreateCategory = (e: any) => {
+    setNewCategoryName(e.target.value);
+  };
+
+  const onButtonClick = () => {
+    setNewCategoryName("");
+  };
   return (
     <>
       <Stack
@@ -29,7 +36,7 @@ export const CategoryModal = () => {
         height={40}
         color={`#5E6166`}
         spacing={1}
-        onClick={handleOpen}
+        onClick={() => setOpen(true)}
       >
         <AddOutlinedIcon />
         <Typography>Create new category</Typography>
@@ -44,7 +51,7 @@ export const CategoryModal = () => {
             borderBottom={`1px solid #E0E0E0`}
             spacing={16}
           >
-            <CloseOutlinedIcon onClick={handleClose} />
+            <CloseOutlinedIcon onClick={() => setOpen(false)} />
             <Typography fontSize={24} fontWeight={700}>
               Create new category
             </Typography>
@@ -52,7 +59,8 @@ export const CategoryModal = () => {
           <Stack p={`24px`} spacing={`16px`} borderBottom={`1px solid #E0E0E0`}>
             <Typography>Category name</Typography>
             <Box
-              width={519}
+              value={newCategoryName}
+              onChange={handleCreateCategory}
               height={56}
               borderRadius={`8px`}
               border={`none`}
@@ -61,6 +69,7 @@ export const CategoryModal = () => {
               component={`input`}
               placeholder="Name"
               px={`12px`}
+              fontSize={16}
             ></Box>
           </Stack>
           <Stack
@@ -72,6 +81,7 @@ export const CategoryModal = () => {
             p={`24px`}
           >
             <Button
+              onClick={() => onButtonClick()}
               sx={{
                 height: 40,
                 width: 65,
@@ -83,6 +93,7 @@ export const CategoryModal = () => {
               Clear
             </Button>
             <Button
+              onClick={() => console.log(newCategoryName)}
               sx={{
                 height: 40,
                 textTransform: `none`,

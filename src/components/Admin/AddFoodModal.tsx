@@ -1,16 +1,32 @@
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import { Box, Button, Modal, Stack, Typography } from "@mui/material";
-import React from "react";
-import { styleForAddFoodModalBox } from "@/utils/dummy-data";
-const inputs = ["Хоолны нэр", "Хоолны ангилал", "Хоолны орц", "Хоолны үнэ"];
+import {
+  Box,
+  Button,
+  FormControl,
+  MenuItem,
+  Modal,
+  Select,
+  SelectChangeEvent,
+  Stack,
+  Typography,
+} from "@mui/material";
+import React, { useState } from "react";
+import {
+  styleForAddFoodModalBox,
+  inputsForCreateFoodModal,
+  MenuBtns,
+} from "@/utils/dummy-data";
+
 export const AddFoodModal = () => {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [age, setAge] = useState("");
+  const handleChange = (event: SelectChangeEvent) => {
+    setAge(event.target.value as string);
+  };
   return (
-    <>
+    <form>
       <Button
-        onClick={handleOpen}
+        onClick={() => setOpen(true)}
         sx={{
           width: 130,
           height: 35,
@@ -25,7 +41,7 @@ export const AddFoodModal = () => {
       </Button>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={() => setOpen(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -36,29 +52,47 @@ export const AddFoodModal = () => {
             alignItems={`center`}
             px={`24px`}
             borderBottom={`1px solid #E0E0E0`}
-            spacing={16}
+            spacing={21.2}
           >
-            <CloseOutlinedIcon onClick={handleClose} />
+            <CloseOutlinedIcon onClick={() => setOpen(false)} />
             <Typography fontSize={24} fontWeight={700}>
               Create food
             </Typography>
           </Stack>
-          <Stack>
-            {inputs.map((val) => {
+          <Stack spacing={2.3} py={3}>
+            {inputsForCreateFoodModal.map((val) => {
               return (
-                <Stack key={val} p={`24px`} spacing={`10px`}>
+                <Stack key={val} px={`24px`} spacing={`5px`}>
                   <Typography>{val}</Typography>
-                  <Box
-                    width={539}
-                    height={56}
-                    borderRadius={`8px`}
-                    border={`none`}
-                    bgcolor={`#F4F4F4`}
-                    sx={{ outline: `none` }}
-                    component={`input`}
-                    placeholder="Name"
-                    px={`12px`}
-                  ></Box>
+                  {val == "Хоолны ангилал" ? (
+                    <FormControl fullWidth>
+                      <Select
+                        sx={{ bgcolor: `#F4F4F4` }}
+                        value={age}
+                        onChange={handleChange}
+                      >
+                        {MenuBtns.map((val) => {
+                          return (
+                            <MenuItem key={val} value={10}>
+                              {val}
+                            </MenuItem>
+                          );
+                        })}
+                      </Select>
+                    </FormControl>
+                  ) : (
+                    <Box
+                      height={56}
+                      borderRadius={`8px`}
+                      border={`none`}
+                      bgcolor={`#F4F4F4`}
+                      sx={{ outline: `none` }}
+                      component={`input`}
+                      placeholder={val}
+                      px={`12px`}
+                      fontSize={16}
+                    ></Box>
+                  )}
                 </Stack>
               );
             })}
@@ -98,6 +132,6 @@ export const AddFoodModal = () => {
           </Stack>
         </Box>
       </Modal>
-    </>
+    </form>
   );
 };

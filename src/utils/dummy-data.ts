@@ -128,6 +128,7 @@ type BasketType = {
 };
 
 export const DrawerCardsArr: BasketType[] = [];
+
 export const styleForAddFoodModalBox = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -137,3 +138,11 @@ export const styleForAddFoodModalBox = {
   bgcolor: "background.paper",
   borderRadius: `16px`,
 };
+
+export const inputsForCreateFoodModal = [
+  "Хоолны нэр",
+  "Хоолны ангилал",
+  "Хоолны орц",
+  "Хоолны үнэ",
+  "Хямдралтай эсэх",
+];

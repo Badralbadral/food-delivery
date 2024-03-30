@@ -7,7 +7,7 @@ export const Crud = () => {
   return (
     <Stack direction={`row`} bgcolor={`#F7F7F8`}>
       <SideBar />
-      <Stack py={`24px`} width={904} height={500}>
+      <Stack py={`24px`} width={904} height={`100%`}>
         <Stack
           direction={`row`}
           alignItems={`center`}
