@@ -13,7 +13,12 @@ export const LoginForm = () => {
       email: e.target.email.value,
       password: e.target.password.value,
     };
-    console.log("🚀 ~ handleSubmit ~ login:", login);
+    fetch("http://localhost:4000/api/login", {
+      method: "POST",
+      body: JSON.stringify(login),
+      mode: `no-cors`,
+      headers: { "Content-Type": "application/json" },
+    });
   };
 
   const styleForInputBtn = {

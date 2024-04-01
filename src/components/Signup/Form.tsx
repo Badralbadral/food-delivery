@@ -16,7 +16,12 @@ export const Form = () => {
       passwords: e.target.password.value,
       rePasswords: e.target.rePassword.value,
     };
-    console.log("🚀 ~ handleSubmit ~ login:", login);
+    fetch("http://localhost:4000/api/signup", {
+      method: "POST",
+      body: JSON.stringify(login),
+      mode: `no-cors`,
+      headers: { "Content-Type": "application/json" },
+    });
   };
 
   const styleForInputBtn = {

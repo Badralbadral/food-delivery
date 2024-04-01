@@ -2,6 +2,7 @@ import { Stack, Typography } from "@mui/material";
 import { SideBar } from "./SideBar";
 import React from "react";
 import { AddFoodModal } from "./AddFoodModal";
+import AddIcon from "@mui/icons-material/Add";
 
 export const Crud = () => {
   return (
@@ -17,6 +18,12 @@ export const Crud = () => {
             Breakfast
           </Typography>
           <AddFoodModal />
+        </Stack>
+        <Stack width={904} alignItems={`center`} spacing={`30px`} mt={7}>
+          <AddIcon sx={{ color: `#18BA51`, fontSize: 80 }} />
+          <Typography color={`#808080`}>
+            Уучлаарай, Таны меню хоосон байна.
+          </Typography>
         </Stack>
       </Stack>
     </Stack>

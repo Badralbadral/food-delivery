@@ -1,12 +1,14 @@
 import { Basket } from "@/svgs/Basket";
 import { Button, Divider, Drawer, Stack, Typography } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import React from "react";
+import { useState } from "react";
 import { NumericFormat } from "react-number-format";
 import { styleForDrawer, DrawerCardsArr } from "@/utils/dummy-data";
 import { DarwerCard } from "./DrawerCard";
 export const DrawerBasket = () => {
-  const [open, setOpen] = React.useState(false);
+  const [foodCount, setFoodCount] = useState(DrawerCardsArr.length);
+  setFoodCount;
+  const [open, setOpen] = useState(false);
   let p = 0;
   let total = 0;
   DrawerCardsArr.map((value) => {
@@ -88,6 +90,20 @@ export const DrawerBasket = () => {
       fontSize={14}
       fontWeight={700}
     >
+      <Stack
+        position={`relative`}
+        left={40}
+        bottom={3}
+        bgcolor={`#18BA51`}
+        zIndex={1000}
+        borderRadius={`50%`}
+        width={16}
+        justifyContent={`center`}
+        alignItems={`center`}
+        color={`white`}
+      >
+        {foodCount}
+      </Stack>
       <Button
         sx={{
           textTransform: `none`,
