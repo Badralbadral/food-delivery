@@ -12,7 +12,7 @@ type ObjType = {
 
 export const SideBar = () => {
   const [categories, setCategories] = useState<Array<ObjType>>();
-  const [commandForCate, setCommandForCate] = useState<string>();
+  const [commandForCate, setCommandForCate] = useState<string>("");
   const [categoryId, setCategoryId] = useState<string>();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -23,17 +23,15 @@ export const SideBar = () => {
 
   const handleSubmit = (e: string) => {
     setCommandForCate(e);
-    commandForCate === "Edit name"
-      ? fetch("http://localhost:4000/api/category", {
-          method: "PUT",
-          body: JSON.stringify(categoryId),
-          headers: { "Content-Type": "application/json" },
-        })
-      : fetch("http://localhost:4000/api/category", {
-          method: "DELETE",
-          body: JSON.stringify(categoryId),
-          headers: { "Content-Type": "application/json" },
-        });
+    const id = {
+      _id: categoryId,
+    };
+    commandForCate;
+    fetch("http://localhost:4000/api/category", {
+      method: "PUT",
+      body: JSON.stringify(id),
+      headers: { "Content-Type": "application/json" },
+    });
   };
 
   useEffect(() => {

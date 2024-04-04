@@ -140,9 +140,9 @@ export const styleForAddFoodModalBox = {
 };
 
 export const inputsForCreateFoodModal = [
-  "Хоолны нэр",
-  "Хоолны ангилал",
-  "Хоолны орц",
-  "Хоолны үнэ",
-  "Хямдралтай эсэх",
+  { name: "Хоолны нэр", eName: "fName" },
+  { name: "Хоолны ангилал", eName: "cate" },
+  { name: "Хоолны орц", eName: "ing" },
+  { name: "Хоолны үнэ", eName: "price" },
+  { name: "Хямдралтай эсэх", eName: "sale" },
 ];

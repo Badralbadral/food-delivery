@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import { Crud } from "@/components/Admin";
+import { Crud } from "@/components/Admin/Crud";
 
 const AdminDashboard = () => {
   return (

@@ -2,12 +2,10 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import {
   Box,
   Button,
-  FormControl,
   MenuItem,
   Modal,
-  Select,
-  SelectChangeEvent,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
@@ -16,20 +14,28 @@ import {
   inputsForCreateFoodModal,
   MenuBtns,
 } from "@/utils/dummy-data";
-
 export const AddFoodModal = () => {
   const [open, setOpen] = React.useState(false);
-  const [age, setAge] = useState("");
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
+  const [selected, setSelected] = useState<any>();
+  const handleChange = (e: string) => {
+    setSelected(e);
+  };
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const createFood = {
+      foodName: e.target.fName.value,
+      foodCategory: selected,
+      ingedients: e.target.ing.value,
+      price: e.target.price.value,
+    };
+    console.log("🚀 ~ handleSubmit ~ createFood:", createFood);
   };
   return (
-    <form>
+    <>
       <Button
         onClick={() => setOpen(true)}
         sx={{
           width: 130,
-          height: 35,
           bgcolor: `#18BA51`,
           color: `white`,
           textTransform: `none`,
@@ -39,13 +45,12 @@ export const AddFoodModal = () => {
       >
         Add new food
       </Button>
-      <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={styleForAddFoodModalBox}>
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <Box
+          component={"form"}
+          onSubmit={handleSubmit}
+          sx={styleForAddFoodModalBox}
+        >
           <Stack
             direction={`row`}
             height={64}
@@ -60,26 +65,29 @@ export const AddFoodModal = () => {
             </Typography>
           </Stack>
           <Stack spacing={2.3} py={3}>
-            {inputsForCreateFoodModal.map((val) => {
+            {inputsForCreateFoodModal.map((value) => {
               return (
-                <Stack key={val} px={`24px`} spacing={`5px`}>
-                  <Typography>{val}</Typography>
-                  {val == "Хоолны ангилал" ? (
-                    <FormControl fullWidth>
-                      <Select
-                        sx={{ bgcolor: `#F4F4F4` }}
-                        value={age}
-                        onChange={handleChange}
-                      >
-                        {MenuBtns.map((val) => {
-                          return (
-                            <MenuItem key={val} value={10}>
-                              {val}
-                            </MenuItem>
-                          );
-                        })}
-                      </Select>
-                    </FormControl>
+                <Stack key={value.name} px={`24px`} spacing={`5px`}>
+                  <Typography>{value.name}</Typography>
+                  {value.name == "Хоолны ангилал" ? (
+                    <TextField
+                      select
+                      sx={{ bgcolor: `#F4F4F4` }}
+                      value={selected ?? ``}
+                      label="Хоолны ангилал"
+                    >
+                      {MenuBtns.map((val) => {
+                        return (
+                          <MenuItem
+                            onClick={() => handleChange(val)}
+                            key={val}
+                            value={val ?? ``}
+                          >
+                            {val}
+                          </MenuItem>
+                        );
+                      })}
+                    </TextField>
                   ) : (
                     <Box
                       height={56}
@@ -88,9 +96,10 @@ export const AddFoodModal = () => {
                       bgcolor={`#F4F4F4`}
                       sx={{ outline: `none` }}
                       component={`input`}
-                      placeholder={val}
+                      placeholder={value.name}
                       px={`12px`}
                       fontSize={16}
+                      name={value.eName}
                     ></Box>
                   )}
                 </Stack>
@@ -118,6 +127,7 @@ export const AddFoodModal = () => {
               Clear
             </Button>
             <Button
+              type="submit"
               sx={{
                 height: 40,
                 textTransform: `none`,
@@ -132,6 +142,6 @@ export const AddFoodModal = () => {
           </Stack>
         </Box>
       </Modal>
-    </form>
+    </>
   );
 };
