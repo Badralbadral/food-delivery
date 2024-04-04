@@ -25,6 +25,16 @@ export const CategoryModal = () => {
   const onButtonClick = () => {
     setNewCategoryName("");
   };
+  const handleSubmit = () => {
+    const createCate = {
+      name: newCategoryName,
+    };
+    fetch("http://localhost:4000/api/category", {
+      method: "POST",
+      body: JSON.stringify(createCate),
+      headers: { "Content-Type": "application/json" },
+    });
+  };
   return (
     <>
       <Stack
@@ -93,7 +103,8 @@ export const CategoryModal = () => {
               Clear
             </Button>
             <Button
-              onClick={() => console.log(newCategoryName)}
+              disabled={newCategoryName == "" ? true : false}
+              onClick={() => handleSubmit()}
               sx={{
                 height: 40,
                 textTransform: `none`,

@@ -7,18 +7,26 @@ export const LoginForm = () => {
   const [hide, setHide] = useState<boolean>(false);
   const router = useRouter();
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     const login = {
       email: e.target.email.value,
       password: e.target.password.value,
     };
-    fetch("http://localhost:4000/api/login", {
+    const res = await fetch("http://localhost:4000/api/login", {
       method: "POST",
       body: JSON.stringify(login),
-      mode: `no-cors`,
-      headers: { "Content-Type": "application/json" },
+      mode: `cors`,
+      headers: {
+        Accept: "application.json",
+        "Content-Type": "application/json",
+      },
     });
+    const data = await res.json();
+    if (data.token) {
+      localStorage.setItem("userToken", data.token);
+      router.push("/");
+    }
   };
 
   const styleForInputBtn = {

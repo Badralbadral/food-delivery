@@ -1,18 +1,50 @@
 import { IconButton, Menu, MenuItem, Stack, Typography } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { MenuBtns } from "@/utils/dummy-data";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { CategoryModal } from "./CategoryModal";
+type ObjType = {
+  _id: string;
+  name: string;
+  __v: number;
+};
 
 export const SideBar = () => {
+  const [categories, setCategories] = useState<Array<ObjType>>();
+  const [commandForCate, setCommandForCate] = useState<string>();
+  const [categoryId, setCategoryId] = useState<string>();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const options = ["Edit name", "Delete Category "];
+  const options = ["Edit name", "Delete Category"];
+
+  const handleSubmit = (e: string) => {
+    setCommandForCate(e);
+    commandForCate === "Edit name"
+      ? fetch("http://localhost:4000/api/category", {
+          method: "PUT",
+          body: JSON.stringify(categoryId),
+          headers: { "Content-Type": "application/json" },
+        })
+      : fetch("http://localhost:4000/api/category", {
+          method: "DELETE",
+          body: JSON.stringify(categoryId),
+          headers: { "Content-Type": "application/json" },
+        });
+  };
+
+  useEffect(() => {
+    async function getData() {
+      const res = await fetch(`http://localhost:4000/api/category`);
+      const json = await res.json();
+      setCategories(json);
+    }
+    getData();
+  }, []);
+
   return (
     <Stack
       py={`26px`}
@@ -27,10 +59,10 @@ export const SideBar = () => {
           Food menu
         </Typography>
         <Stack spacing={`26px`}>
-          {MenuBtns.map((val) => {
+          {categories?.map((val) => {
             return (
               <Stack
-                key={val}
+                key={val._id}
                 direction={`row`}
                 alignItems={`center`}
                 justifyContent={`space-between`}
@@ -39,8 +71,8 @@ export const SideBar = () => {
                 border={`1px solid #D6D8DB`}
                 height={40}
               >
-                <Typography>{val}</Typography>
-                <Stack>
+                <Typography>{val.name}</Typography>
+                <Stack onClick={() => setCategoryId(val._id)}>
                   <IconButton
                     aria-controls={open ? "long-menu" : undefined}
                     aria-expanded={open ? "true" : undefined}
@@ -63,7 +95,7 @@ export const SideBar = () => {
                     {options.map((option) => (
                       <MenuItem
                         sx={
-                          option == "Delete Category "
+                          option == "Delete Category"
                             ? {
                                 display: `flex`,
                                 gap: `16px`,
@@ -76,9 +108,12 @@ export const SideBar = () => {
                         }
                         key={option}
                         selected={option === "Pyxis"}
-                        onClick={() => setAnchorEl(null)}
+                        onClick={() => {
+                          setAnchorEl(null);
+                          handleSubmit(option);
+                        }}
                       >
-                        {option == "Delete Category " ? (
+                        {option == "Delete Category" ? (
                           <DeleteOutlineOutlinedIcon
                             sx={{ color: `#DF1F29` }}
                           />

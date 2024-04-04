@@ -1,25 +1,32 @@
 import { Hide } from "@/svgs/HIde";
-import { Box, Checkbox, Input, Stack } from "@mui/material";
+import { Box, Button, Checkbox, Stack } from "@mui/material";
 import { useState } from "react";
 import { Inputs, passwords } from "@/utils/dummy-data";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 export const Form = () => {
   const [hide, setHide] = useState<boolean>(false);
+  // const [empty, setEmpty] = useState<boolean>(false);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    if (
+      e.target.Нэр.value > "" ||
+      e.target.Имэйл.value > "" ||
+      e.target.Хаяг.value > "" ||
+      e.target.password.value > ""
+    ) {
+      // setEmpty(true);
+    }
     const login = {
       name: e.target.Нэр.value,
       email: e.target.Имэйл.value,
       address: e.target.Хаяг.value,
-      passwords: e.target.password.value,
-      rePasswords: e.target.rePassword.value,
+      password: e.target.password.value,
     };
     fetch("http://localhost:4000/api/signup", {
       method: "POST",
       body: JSON.stringify(login),
-      mode: `no-cors`,
       headers: { "Content-Type": "application/json" },
     });
   };
@@ -32,7 +39,7 @@ export const Form = () => {
     boxShadow: `none`,
     py: `19px`,
     color: `white`,
-    borderRadius: 4,
+    textTransform: `none`,
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -102,14 +109,13 @@ export const Form = () => {
         <Checkbox {...label} />
         Үйлчилгээний нөхцөл зөвшөөрөх
       </Stack>
-      <Stack alignItems={`center`} spacing={`25px`}>
-        <Input
-          disableUnderline
-          type="submit"
-          value={" Бүртгүүлэх"}
-          style={styleForInputBtn}
-        />
-      </Stack>
+      <Button
+        // disabled={empty ? false : true}
+        sx={styleForInputBtn}
+        type="submit"
+      >
+        Бүртгүүлэх
+      </Button>
     </form>
   );
 };
