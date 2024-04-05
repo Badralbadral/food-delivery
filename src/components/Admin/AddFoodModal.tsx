@@ -1,25 +1,11 @@
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import {
-  Box,
-  Button,
-  MenuItem,
-  Modal,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Modal, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
-import {
-  styleForAddFoodModalBox,
-  inputsForCreateFoodModal,
-  MenuBtns,
-} from "@/utils/dummy-data";
+import { styleForAddFoodModalBox } from "@/utils/dummy-data";
+import { Inputs } from "./Inputs";
 export const AddFoodModal = () => {
   const [open, setOpen] = React.useState(false);
-  const [selected, setSelected] = useState<any>();
-  const handleChange = (e: string) => {
-    setSelected(e);
-  };
+  const [selected, setSelected] = useState<string>("");
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const createFood = {
@@ -27,9 +13,16 @@ export const AddFoodModal = () => {
       foodCategory: selected,
       ingedients: e.target.ing.value,
       price: e.target.price.value,
+      sale: e.target.sale.value,
     };
     console.log("🚀 ~ handleSubmit ~ createFood:", createFood);
+    fetch("http://localhost:4000/api/food", {
+      method: "POST",
+      body: JSON.stringify(createFood),
+      headers: { "Content-Type": "application/json" },
+    });
   };
+
   return (
     <>
       <Button
@@ -64,48 +57,7 @@ export const AddFoodModal = () => {
               Create food
             </Typography>
           </Stack>
-          <Stack spacing={2.3} py={3}>
-            {inputsForCreateFoodModal.map((value) => {
-              return (
-                <Stack key={value.name} px={`24px`} spacing={`5px`}>
-                  <Typography>{value.name}</Typography>
-                  {value.name == "Хоолны ангилал" ? (
-                    <TextField
-                      select
-                      sx={{ bgcolor: `#F4F4F4` }}
-                      value={selected ?? ``}
-                      label="Хоолны ангилал"
-                    >
-                      {MenuBtns.map((val) => {
-                        return (
-                          <MenuItem
-                            onClick={() => handleChange(val)}
-                            key={val}
-                            value={val ?? ``}
-                          >
-                            {val}
-                          </MenuItem>
-                        );
-                      })}
-                    </TextField>
-                  ) : (
-                    <Box
-                      height={56}
-                      borderRadius={`8px`}
-                      border={`none`}
-                      bgcolor={`#F4F4F4`}
-                      sx={{ outline: `none` }}
-                      component={`input`}
-                      placeholder={value.name}
-                      px={`12px`}
-                      fontSize={16}
-                      name={value.eName}
-                    ></Box>
-                  )}
-                </Stack>
-              );
-            })}
-          </Stack>
+          <Inputs selected={selected} setFunc={setSelected} />
           <Stack
             height={77}
             direction={`row`}
@@ -116,6 +68,7 @@ export const AddFoodModal = () => {
             borderTop={`1px solid #E0E0E0`}
           >
             <Button
+              type="reset"
               sx={{
                 height: 40,
                 width: 65,

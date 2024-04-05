@@ -1,5 +1,5 @@
-import { Box, Button, Modal, Stack, Typography } from "@mui/material";
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import { Box, Button, MenuItem, Modal, Stack, Typography } from "@mui/material";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import React, { useState } from "react";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
@@ -14,7 +14,7 @@ const style = {
   borderRadius: `16px`,
 };
 
-export const CategoryModal = () => {
+export const EditModal = ({ currentName }: { currentName: string }) => {
   const [open, setOpen] = useState(false);
   const [newCategoryName, setNewCategoryName] = useState<string>("");
   const handleCreateCategory = (e: any) => {
@@ -22,30 +22,31 @@ export const CategoryModal = () => {
   };
   const handleSubmit = () => {
     const createCate = {
-      name: newCategoryName,
+      name: currentName,
+      updateOne: "sgdsg",
     };
+    console.log("🚀 ~ handleSubmit ~ createCate:", createCate);
     fetch("http://localhost:4000/api/category", {
-      method: "POST",
+      method: "PUT",
       body: JSON.stringify(createCate),
       headers: { "Content-Type": "application/json" },
     });
   };
   return (
     <>
-      <Stack
-        direction={`row`}
-        alignItems={`center`}
-        borderRadius={`8px`}
-        px={`16px`}
-        border={`1px solid #D6D8DB`}
-        height={40}
-        color={`#5E6166`}
-        spacing={1}
-        onClick={() => setOpen(true)}
+      <MenuItem
+        sx={{
+          display: `flex`,
+          gap: `16px`,
+        }}
+        onClick={() => {
+          handleSubmit();
+          setOpen(true);
+        }}
       >
-        <AddOutlinedIcon />
-        <Typography>Create new category</Typography>
-      </Stack>
+        <EditOutlinedIcon sx={{ color: `#525252` }} />
+        Edit name
+      </MenuItem>
       <Modal open={open}>
         <Box sx={style}>
           <Stack
@@ -54,15 +55,15 @@ export const CategoryModal = () => {
             alignItems={`center`}
             px={`24px`}
             borderBottom={`1px solid #E0E0E0`}
-            spacing={16}
+            spacing={14.4}
           >
             <CloseOutlinedIcon onClick={() => setOpen(false)} />
             <Typography fontSize={24} fontWeight={700}>
-              Create new category
+              Edit category name
             </Typography>
           </Stack>
           <Stack p={`24px`} spacing={`16px`} borderBottom={`1px solid #E0E0E0`}>
-            <Typography>Category name</Typography>
+            <Typography>New category name</Typography>
             <Box
               value={newCategoryName}
               onChange={handleCreateCategory}
@@ -99,7 +100,7 @@ export const CategoryModal = () => {
             </Button>
             <Button
               disabled={newCategoryName == "" ? true : false}
-              onClick={() => handleSubmit()}
+              onClick={() => handleSubmit}
               sx={{
                 height: 40,
                 textTransform: `none`,
