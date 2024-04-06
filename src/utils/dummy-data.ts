@@ -107,6 +107,7 @@ export const styleForSCard = {
   textDecoration: `line-through`,
   width: 75,
   fontWeight: 600,
+  backgroundColor: `#F7F7F8`,
 };
 export const styleForSaleCards = {
   color: `#18BA51`,
@@ -115,6 +116,7 @@ export const styleForSaleCards = {
   fontSize: 17,
   width: 75,
   fontWeight: 600,
+  backgroundColor: `#F7F7F8`,
 };
 type BasketType = {
   category: string;

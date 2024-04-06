@@ -6,6 +6,7 @@ import { Inputs } from "./Inputs";
 export const AddFoodModal = () => {
   const [open, setOpen] = React.useState(false);
   const [selected, setSelected] = useState<string>("");
+  const [checkSale, setCheckSale] = useState<boolean>(false);
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const createFood = {
@@ -13,16 +14,14 @@ export const AddFoodModal = () => {
       foodCategory: selected,
       ingedients: e.target.ing.value,
       price: e.target.price.value,
-      sale: e.target.sale.value,
+      sale: checkSale == false ? 0 : e.target.sale.value,
     };
-    console.log("🚀 ~ handleSubmit ~ createFood:", createFood);
     fetch("http://localhost:4000/api/food", {
       method: "POST",
       body: JSON.stringify(createFood),
       headers: { "Content-Type": "application/json" },
     });
   };
-
   return (
     <>
       <Button
@@ -57,7 +56,12 @@ export const AddFoodModal = () => {
               Create food
             </Typography>
           </Stack>
-          <Inputs selected={selected} setFunc={setSelected} />
+          <Inputs
+            setSale={setCheckSale}
+            sale={checkSale}
+            selected={selected}
+            setFunc={setSelected}
+          />
           <Stack
             height={77}
             direction={`row`}

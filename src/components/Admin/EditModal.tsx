@@ -16,16 +16,16 @@ const style = {
 
 export const EditModal = ({ currentName }: { currentName: string }) => {
   const [open, setOpen] = useState(false);
+  const [cName, setCName] = useState<string>();
   const [newCategoryName, setNewCategoryName] = useState<string>("");
-  const handleCreateCategory = (e: any) => {
+  const handleOnChange = (e: any) => {
     setNewCategoryName(e.target.value);
   };
   const handleSubmit = () => {
     const createCate = {
-      name: currentName,
-      updateOne: "sgdsg",
+      name: cName,
+      updateOne: newCategoryName,
     };
-    console.log("🚀 ~ handleSubmit ~ createCate:", createCate);
     fetch("http://localhost:4000/api/category", {
       method: "PUT",
       body: JSON.stringify(createCate),
@@ -40,8 +40,8 @@ export const EditModal = ({ currentName }: { currentName: string }) => {
           gap: `16px`,
         }}
         onClick={() => {
-          handleSubmit();
           setOpen(true);
+          setCName(currentName);
         }}
       >
         <EditOutlinedIcon sx={{ color: `#525252` }} />
@@ -66,7 +66,7 @@ export const EditModal = ({ currentName }: { currentName: string }) => {
             <Typography>New category name</Typography>
             <Box
               value={newCategoryName}
-              onChange={handleCreateCategory}
+              onChange={handleOnChange}
               height={56}
               borderRadius={`8px`}
               border={`none`}
@@ -100,7 +100,7 @@ export const EditModal = ({ currentName }: { currentName: string }) => {
             </Button>
             <Button
               disabled={newCategoryName == "" ? true : false}
-              onClick={() => handleSubmit}
+              onClick={() => handleSubmit()}
               sx={{
                 height: 40,
                 textTransform: `none`,

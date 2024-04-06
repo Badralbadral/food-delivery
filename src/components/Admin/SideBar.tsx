@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { CategoryModal } from "./CategoryModal";
 import { EditModal } from "./EditModal";
+import { ContextType, useFoodData } from "@/context/FoodContext";
 type ObjType = {
   _id: string;
   name: string;
@@ -15,6 +16,7 @@ export const SideBar = () => {
   const [categoryId, setCategoryID] = useState<string>();
   const [categoryName, setCategoryName] = useState<string>("");
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const { setCategory } = useFoodData() as ContextType;
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -29,6 +31,7 @@ export const SideBar = () => {
       headers: { "Content-Type": "application/json" },
     });
   };
+
   useEffect(() => {
     async function getData() {
       const res = await fetch(`http://localhost:4000/api/category`);
@@ -55,6 +58,7 @@ export const SideBar = () => {
           {categories?.map((val) => {
             return (
               <Stack
+                onClick={() => setCategory(val.name)}
                 key={val._id}
                 direction={`row`}
                 alignItems={`center`}
@@ -79,9 +83,7 @@ export const SideBar = () => {
                     open={open}
                     onClose={() => setAnchorEl(null)}
                   >
-                    <Stack>
-                      <EditModal currentName={categoryName} />
-                    </Stack>
+                    <EditModal currentName={categoryName} />
                     <MenuItem
                       sx={{
                         display: `flex`,

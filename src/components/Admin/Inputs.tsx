@@ -21,12 +21,15 @@ const label = { inputProps: { "aria-label": "Switch demo" } };
 export const Inputs = ({
   selected,
   setFunc,
+  setSale,
+  sale,
 }: {
   selected: any;
   setFunc: Dispatch<React.SetStateAction<string>>;
+  setSale: Dispatch<React.SetStateAction<boolean>>;
+  sale: boolean;
 }) => {
   const [categories, setCategories] = useState<Array<ObjType>>();
-  const [sale, setSale] = useState<boolean>(false);
   useEffect(() => {
     async function getData() {
       const res = await fetch(`http://localhost:4000/api/category`);
@@ -68,24 +71,19 @@ export const Inputs = ({
                 </Select>
               </FormControl>
             ) : (
-              <>
-                <Box
-                  height={56}
-                  borderRadius={`8px`}
-                  border={`none`}
-                  bgcolor={`#F4F4F4`}
-                  sx={{ outline: `none` }}
-                  component={`input`}
-                  placeholder={value.name}
-                  px={`12px`}
-                  fontSize={16}
-                  name={value.eName}
-                  required
-                  type={`${
-                    value.name == "Хямдралтай эсэх" ? "number" : "text"
-                  }`}
-                ></Box>
-              </>
+              <Box
+                height={56}
+                borderRadius={`8px`}
+                border={`none`}
+                bgcolor={`#F4F4F4`}
+                sx={{ outline: `none` }}
+                component={`input`}
+                placeholder={value.name}
+                px={`12px`}
+                fontSize={16}
+                name={value.eName}
+                type={`${value.name == "Хямдралтай эсэх" ? "number" : "text"}`}
+              ></Box>
             )}
           </Stack>
         );
