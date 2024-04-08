@@ -42,6 +42,7 @@ export const CardModal = ({
           height={500}
           component={"img"}
           src={data.imagePath}
+          borderRadius={`8px`}
         ></Box>
         <Stack height={410} spacing={`32px`}>
           <Stack position={`relative`}>

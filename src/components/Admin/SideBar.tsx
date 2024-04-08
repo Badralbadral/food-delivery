@@ -18,9 +18,7 @@ export const SideBar = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const { setCategory } = useFoodData() as ContextType;
   const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+
   const handleSubmit = () => {
     setAnchorEl(null);
     fetch("http://localhost:4000/api/category", {
@@ -75,7 +73,7 @@ export const SideBar = () => {
                     setCategoryName(val.name);
                   }}
                 >
-                  <IconButton onClick={handleClick}>
+                  <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
                     <MoreVertIcon />
                   </IconButton>
                   <Menu

@@ -1,9 +1,7 @@
 import { inputsForCreateFoodModal } from "@/utils/dummy-data";
 import {
   Box,
-  Button,
   FormControl,
-  Input,
   InputLabel,
   MenuItem,
   Select,
@@ -12,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Dispatch, useEffect, useState } from "react";
+import { AddImg } from "./AddImg";
 type ObjType = {
   _id: string;
   name: string;
@@ -88,37 +87,7 @@ export const Inputs = ({
           </Stack>
         );
       })}
-      <Stack position={`relative`} left={24}>
-        <Typography mb={`5px`}>Хоолны зураг</Typography>
-        <Stack
-          bgcolor={`#BABCC41F`}
-          width={284}
-          height={122}
-          border={`1px solid #D6D7DC`}
-          spacing={1}
-          justifyContent={`center`}
-          alignItems={`center`}
-        >
-          <Typography fontWeight={600} color={`#525252`}>
-            Add image for the food
-          </Typography>
-          <Button
-            variant="contained"
-            component="label"
-            sx={{
-              width: 114,
-              height: 40,
-              bgcolor: `#393939`,
-              color: `white`,
-              fontSize: 12,
-              borderRadius: `8px`,
-            }}
-          >
-            Add image
-            <Input id="img" sx={{ display: `none` }} type="file" />
-          </Button>
-        </Stack>
-      </Stack>
+      <AddImg />
     </Stack>
   );
 };

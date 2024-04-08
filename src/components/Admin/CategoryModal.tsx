@@ -17,6 +17,7 @@ const style = {
 export const CategoryModal = () => {
   const [open, setOpen] = useState(false);
   const [newCategoryName, setNewCategoryName] = useState<string>("");
+
   const handleCreateCategory = (e: any) => {
     setNewCategoryName(e.target.value);
   };

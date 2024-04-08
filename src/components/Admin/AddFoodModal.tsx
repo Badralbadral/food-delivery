@@ -3,10 +3,12 @@ import { Box, Button, Modal, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { styleForAddFoodModalBox } from "@/utils/dummy-data";
 import { Inputs } from "./Inputs";
+import { useFoodData, ContextType } from "@/context/FoodContext";
 export const AddFoodModal = () => {
   const [open, setOpen] = React.useState(false);
   const [selected, setSelected] = useState<string>("");
   const [checkSale, setCheckSale] = useState<boolean>(false);
+  const { imageUrl, setImageUrl } = useFoodData() as ContextType;
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const createFood = {
@@ -15,7 +17,9 @@ export const AddFoodModal = () => {
       ingedients: e.target.ing.value,
       price: e.target.price.value,
       sale: checkSale == false ? 0 : e.target.sale.value,
+      img: imageUrl,
     };
+    console.log("🚀 ~ handleSubmit ~ createFood:", createFood);
     fetch("http://localhost:4000/api/food", {
       method: "POST",
       body: JSON.stringify(createFood),
@@ -72,6 +76,7 @@ export const AddFoodModal = () => {
             borderTop={`1px solid #E0E0E0`}
           >
             <Button
+              onClick={() => setImageUrl("null")}
               type="reset"
               sx={{
                 height: 40,

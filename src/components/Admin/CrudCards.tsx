@@ -34,7 +34,7 @@ export const CrudCards = ({ data }: { data: Array<FoodType> }) => {
               position={`relative`}
               mb={4}
             >
-              <Stack sx={{ ":hover": { backgroundColor: `black` } }}>
+              <Stack>
                 <Box
                   borderRadius={`16px`}
                   component={"img"}
