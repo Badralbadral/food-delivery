@@ -14,7 +14,7 @@ export const AddFoodModal = () => {
     const createFood = {
       foodName: e.target.fName.value,
       foodCategory: selected,
-      ingedients: e.target.ing.value,
+      ingredients: e.target.ing.value,
       price: e.target.price.value,
       sale: checkSale == false ? 0 : e.target.sale.value,
       img: imageUrl,
