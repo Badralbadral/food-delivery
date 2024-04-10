@@ -1,12 +1,21 @@
 import { Box, Input, Stack, Typography } from "@mui/material";
+import { nanoid } from "nanoid";
 
 export const StepOne = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    const login = {
+    const Email = {
       email: e.target.email.value,
+      key: nanoid(6),
     };
-    console.log("🚀 ~ handleSubmit ~ login:", login);
+    fetch("http://localhost:4000/api/sendEmailForm", {
+      method: "POST",
+      body: JSON.stringify(Email),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
   };
 
   const styleForInputBtn = {
@@ -47,6 +56,7 @@ export const StepOne = () => {
             px={2}
             component={"input"}
             placeholder="Имэйл хаягаа оруулна уу"
+            required
           ></Box>
         </Stack>
         <Stack alignItems={`center`} spacing={`25px`}>
