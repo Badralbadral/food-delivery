@@ -7,17 +7,10 @@ import {
   styleObj,
   styleForNum,
   styleForSaleNum,
-  DrawerCardsArr,
+  // DrawerCardsArr,
+  FoodsDataType,
 } from "@/utils/dummy-data";
-type ObjType = {
-  category: string;
-  foodName: string;
-  price: number;
-  imagePath: string;
-  ingredients: string[];
-  stock: number;
-  sale: number;
-};
+
 export const CardModal = ({
   stateVal,
   func,
@@ -25,10 +18,10 @@ export const CardModal = ({
 }: {
   stateVal: boolean;
   func: () => void;
-  data: ObjType;
+  data: FoodsDataType | undefined;
 }) => {
   const [quantity, setQuantity] = useState<number>(1);
-  const changedData = { ...data, count: quantity };
+  // const changedData = { ...data, count: quantity };
   return (
     <Modal open={stateVal}>
       <Stack
@@ -41,16 +34,16 @@ export const CardModal = ({
           width={500}
           height={500}
           component={"img"}
-          src={data.imagePath}
+          src={data?.img}
           borderRadius={`8px`}
         ></Box>
         <Stack height={410} spacing={`32px`}>
           <Stack position={`relative`}>
             <Close prop={func} />
             <Typography fontSize={28} fontWeight={700} mb={0.5}>
-              {data.foodName}
+              {data?.foodName}
             </Typography>
-            {data.sale > 0 ? (
+            {data && data.sale > 0 ? (
               <Stack direction={`row`} alignItems={`center`} spacing={1}>
                 <NumericFormat
                   style={styleForSaleNum}
@@ -68,7 +61,7 @@ export const CardModal = ({
             ) : (
               <NumericFormat
                 style={styleForSaleNum}
-                value={`${data.price - (data.price * data.sale) / 100}`}
+                value={`${data && data.price - (data.price * data.sale) / 100}`}
                 thousandSeparator=","
                 suffix="₮"
                 disabled
@@ -91,8 +84,8 @@ export const CardModal = ({
               p={`8px`}
               fontSize={16}
             >
-              {data.ingredients.map((val, index) => {
-                return <Typography key={index}>{val},</Typography>;
+              {data?.ingredients.map((val: string) => {
+                return <Typography key={val}>{val},</Typography>;
               })}
             </Stack>
           </Stack>
@@ -117,18 +110,18 @@ export const CardModal = ({
                 {quantity}
               </Typography>
               <Button
-                onClick={() =>
-                  setQuantity(data.stock <= quantity ? quantity : quantity + 1)
-                }
+                // onClick={() =>
+                //   setQuantity(data.stock <= quantity ? quantity : quantity + 1)
+                // }
                 sx={styleObj}
               >
                 +
               </Button>
             </Stack>
             <Button
-              onClick={() => {
-                DrawerCardsArr.push(changedData);
-              }}
+              // onClick={() => {
+              //   DrawerCardsArr.push(changedData);
+              // }}
               sx={{
                 bgcolor: `#18BA51`,
                 height: 40,

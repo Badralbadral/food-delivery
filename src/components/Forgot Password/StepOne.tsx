@@ -1,13 +1,18 @@
-import { Box, Input, Stack, Typography } from "@mui/material";
+import { Box, CircularProgress, Input, Stack, Typography } from "@mui/material";
 import { nanoid } from "nanoid";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 export const StepOne = () => {
+  const router = useRouter();
+  const [load, setLoad] = useState<boolean>(false);
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const Email = {
       email: e.target.email.value,
       key: nanoid(6),
     };
+    setLoad(true);
     fetch("http://localhost:4000/api/sendEmailForm", {
       method: "POST",
       body: JSON.stringify(Email),
@@ -16,6 +21,16 @@ export const StepOne = () => {
         Accept: "application/json",
       },
     });
+    fetch("http://localhost:4000/api/sendEmailForm", {
+      method: "PUT",
+      body: JSON.stringify(Email),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    setLoad(false);
+    router.push("/step-two");
   };
 
   const styleForInputBtn = {
@@ -59,14 +74,27 @@ export const StepOne = () => {
             required
           ></Box>
         </Stack>
-        <Stack alignItems={`center`} spacing={`25px`}>
-          <Input
-            disableUnderline
-            type="submit"
-            value={"Үргэлжлүүлэх"}
-            style={styleForInputBtn}
-          />
-        </Stack>
+        {load == false ? (
+          <Stack alignItems={`center`} spacing={`25px`}>
+            <Input
+              disableUnderline
+              type="submit"
+              value={"Үргэлжлүүлэх"}
+              style={styleForInputBtn}
+            />
+          </Stack>
+        ) : (
+          <Box
+            sx={{
+              display: "flex",
+              position: `relative`,
+              left: 140,
+              bottom: 30,
+            }}
+          >
+            <CircularProgress size={"small"} />
+          </Box>
+        )}
       </form>
     </Stack>
   );

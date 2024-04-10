@@ -101,7 +101,7 @@ export const LoginForm = () => {
           </Stack>
         </Stack>
         <Button
-          href="/forgot-pass"
+          href="/step-one"
           sx={{
             color: `#3F4145`,
             position: `relative`,

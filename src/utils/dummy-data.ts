@@ -14,8 +14,8 @@ export const passwords = [
 ];
 
 export const NewPassword = [
-  { label: "Нууц үг", name: "password" },
-  { label: "Нууц үг давтах", name: "rePassword" },
+  { label: "Шинэ нууц үг", name: "password" },
+  { label: "Шинэ нууц үг давтах", name: "rePassword" },
 ];
 
 export const controlCards = [
@@ -118,18 +118,18 @@ export const styleForSaleCards = {
   fontWeight: 600,
   backgroundColor: `#F7F7F8`,
 };
-type BasketType = {
-  category: string;
+export type FoodsDataType = {
+  foodCategory: string;
   foodName: string;
+  img: string;
+  ingredients: [string];
   price: number;
-  imagePath: string;
-  ingredients: string[];
-  stock: number;
   sale: number;
-  count: number;
+  stock: number;
+  _id: string;
 };
 
-export const DrawerCardsArr: BasketType[] = [];
+export const DrawerCardsArr: FoodsDataType[] = [];
 
 export const styleForAddFoodModalBox = {
   position: "absolute" as "absolute",

@@ -1,15 +1,23 @@
 import { Box, Input, Stack, Typography } from "@mui/material";
 import { Hide } from "@/svgs/HIde";
 import { useState } from "react";
+import { StepTree } from "./StepTree";
 
 export const StepTwo = () => {
   const [hide, setHide] = useState<boolean>(false);
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    const login = {
-      code: e.target.fourDigits.value,
+    const verification = {
+      code: e.target.sixDigits.value,
+      newPassword: e.target.password.value,
+      rePassword: e.target.rePassword.value,
     };
-    console.log("🚀 ~ handleSubmit ~ login:", login);
+    console.log("🚀 ~ handleSubmit ~ verification:", verification);
+    fetch("http://localhost:4000/api/sendEmailForm", {
+      method: "PUT",
+      body: JSON.stringify(verification),
+      headers: { "Content-Type": "application/json" },
+    });
   };
 
   const styleForInputBtn = {
@@ -23,17 +31,17 @@ export const StepTwo = () => {
     borderRadius: 4,
   };
   return (
-    <Stack
-      borderRadius={`16px`}
-      width={384}
-      height={455}
-      alignItems={`center`}
-      p={`32px`}
-    >
-      <Typography fontSize={28} fontWeight={600} mb={4}>
-        Нууц үг сэргээх
-      </Typography>
-      <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
+      <Stack
+        borderRadius={`16px`}
+        width={384}
+        height={655}
+        alignItems={`center`}
+        p={`32px`}
+      >
+        <Typography fontSize={28} fontWeight={600} mb={4}>
+          Нууц үг сэргээх
+        </Typography>
         <Typography mb={4}>
           Таны{" "}
           <Box component={`span`} color={`#18BA51`}>
@@ -59,7 +67,7 @@ export const StepTwo = () => {
             <Box
               sx={{ ":focus": { outline: "none" } }}
               type={`${hide ? "password" : "text"}`}
-              name="fourDigits"
+              name="sixDigits"
               border={`none`}
               bgcolor={`#F7F7F8`}
               height={32}
@@ -78,7 +86,8 @@ export const StepTwo = () => {
             style={styleForInputBtn}
           />
         </Stack>
-      </form>
-    </Stack>
+        <StepTree />
+      </Stack>
+    </form>
   );
 };
