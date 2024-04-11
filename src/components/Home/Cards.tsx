@@ -5,22 +5,14 @@ import { CardModal } from "./CardModal";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { NumericFormat } from "react-number-format";
 import { styleForCards } from "@/utils/dummy-data";
-type FoodType = {
-  id: number;
-  category: string;
-  foodName: string;
-  price: number;
-  imagePath: string;
-  ingredients: string[];
-  stock: number;
-  sale: number;
-};
+import { FoodsDataType } from "@/types/FoodsDataType";
+
 export const Card = ({
   title,
   data,
 }: {
   title: string;
-  data: Array<FoodType>;
+  data: Array<FoodsDataType> | undefined;
 }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<number>(0);
@@ -53,7 +45,7 @@ export const Card = ({
         </Button>
       </Stack>
       <Stack direction={`row`} flexWrap={`wrap`} width={1290}>
-        {data.slice(0, 4).map((val, index) => {
+        {data?.slice(0, 4).map((val, index) => {
           return (
             <Stack
               onClick={() => {
@@ -68,7 +60,7 @@ export const Card = ({
               <Box
                 borderRadius={`16px`}
                 component={"img"}
-                src={val.imagePath}
+                src={val.img}
                 width={282}
                 height={186}
                 position={`relative`}
@@ -95,7 +87,7 @@ export const Card = ({
         <CardModal
           stateVal={open}
           func={() => setOpen(!open)}
-          data={data[selected]}
+          data={data && data[selected]}
         />
       </Stack>
     </Stack>

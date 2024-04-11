@@ -1,9 +1,8 @@
 import { Stack } from "@mui/material";
 import { SaleCard } from "@/components/Home/index";
 import { Card } from "./Cards";
-import foodData from "@/dummy.json";
 import { useEffect, useState } from "react";
-import { FoodsDataType } from "@/utils/dummy-data";
+import { FoodsDataType } from "@/types/FoodsDataType";
 
 export const FoodCards = () => {
   const cards = [
@@ -25,7 +24,7 @@ export const FoodCards = () => {
       <SaleCard
         title=" Хямдралтай"
         data={foods?.filter((val) => {
-          return val.sale > 0;
+          return val.sale && val.sale > 0;
         })}
       />
       {cards.map((e, index) => {
@@ -33,8 +32,8 @@ export const FoodCards = () => {
           <Card
             key={index}
             title={e.title}
-            data={foodData.filter((val) => {
-              return val.category == e.cate && val.sale == 0;
+            data={foods?.filter((val) => {
+              return val.foodCategory == e.cate && val.sale == 0;
             })}
           />
         );

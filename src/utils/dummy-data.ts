@@ -118,16 +118,7 @@ export const styleForSaleCards = {
   fontWeight: 600,
   backgroundColor: `#F7F7F8`,
 };
-export type FoodsDataType = {
-  foodCategory: string;
-  foodName: string;
-  img: string;
-  ingredients: [string];
-  price: number;
-  sale: number;
-  stock: number;
-  _id: string;
-};
+import { FoodsDataType } from "@/types/FoodsDataType";
 
 export const DrawerCardsArr: FoodsDataType[] = [];
 
@@ -148,3 +139,13 @@ export const inputsForCreateFoodModal = [
   { name: "Хоолны үнэ", eName: "price" },
   { name: "Хямдралтай эсэх", eName: "sale" },
 ];
+export const styleForInputBtn = {
+  height: 32,
+  width: 320,
+  fontSize: 14,
+  backgroundColor: `#18BA51`,
+  boxShadow: `none`,
+  py: `19px`,
+  color: `white`,
+  borderRadius: 4,
+};

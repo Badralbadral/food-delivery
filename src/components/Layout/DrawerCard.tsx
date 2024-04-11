@@ -1,22 +1,14 @@
+import { FoodsDataType } from "@/types/FoodsDataType";
 import { styleForCards, styleForDrawerCardBtn } from "@/utils/dummy-data";
 import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import { NumericFormat } from "react-number-format";
-type BasketType = {
-  category: string;
-  foodName: string;
-  price: number;
-  imagePath: string;
-  ingredients: string[];
-  stock: number;
-  sale: number;
-  count: number;
-};
-export const DarwerCard = ({ data }: { data: BasketType }) => {
+
+export const DarwerCard = ({ data }: { data: FoodsDataType }) => {
   const [quantity, setQuantity] = useState<number>(data.count);
-  let p = 0;
-  if (data.sale > 0) {
-    p = data.price - (data.price * data.sale) / 100;
+  let p: number | undefined = 0;
+  if (data.sale && data.sale > 0) {
+    p = data.price && data.price - (data.price * data.sale) / 100;
   } else {
     p = data.price;
   }
@@ -32,10 +24,11 @@ export const DarwerCard = ({ data }: { data: BasketType }) => {
       >
         <Box
           component="img"
-          src={`${data.imagePath}`}
+          src={`${data.img}`}
           width={245}
           height={150}
           bgcolor={`gray`}
+          borderRadius={`8px`}
         ></Box>
         <Stack justifyContent={`center`} width={245} height={150}>
           <Typography mb={0.4} fontSize={18} fontWeight={600}>
@@ -43,7 +36,7 @@ export const DarwerCard = ({ data }: { data: BasketType }) => {
           </Typography>
           <NumericFormat
             style={styleForCards}
-            value={p * data.count}
+            value={p && p * data.count}
             thousandSeparator=","
             suffix="₮"
             disabled
@@ -55,7 +48,7 @@ export const DarwerCard = ({ data }: { data: BasketType }) => {
             color={`#767676`}
             my={1}
           >
-            {data.ingredients.map((val, index) => {
+            {data?.ingredients?.map((val, index) => {
               return <Typography key={index}>{val},</Typography>;
             })}
           </Stack>
@@ -75,10 +68,11 @@ export const DarwerCard = ({ data }: { data: BasketType }) => {
             </Button>
             {quantity}
             <Button
-              onClick={() =>
-                setQuantity(
-                  quantity + data.count <= data.stock ? quantity + 1 : quantity
-                )
+              onClick={
+                () => setQuantity(quantity + 1)
+                // setQuantity(
+                //   quantity + data.count <= data.stock ? quantity + 1 : quantity
+                // )
               }
               style={styleForDrawerCardBtn}
             >

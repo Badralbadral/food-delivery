@@ -3,16 +3,9 @@ import { useState } from "react";
 import { CardModal } from "../Home/CardModal";
 import { NumericFormat } from "react-number-format";
 import { styleForSCard, styleForSaleCards } from "@/utils/dummy-data";
-type FoodType = {
-  category: string;
-  foodName: string;
-  price: number;
-  imagePath: string;
-  ingredients: string[];
-  stock: number;
-  sale: number;
-};
-export const MenuCards = ({ data }: { data: Array<FoodType> }) => {
+import { FoodsDataType } from "@/types/FoodsDataType";
+
+export const MenuCards = ({ data }: { data: Array<FoodsDataType> }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<number>(0);
   const sortedData = data.sort((a, b) => {
@@ -37,7 +30,7 @@ export const MenuCards = ({ data }: { data: Array<FoodType> }) => {
               <Box
                 borderRadius={`16px`}
                 component={"img"}
-                src={val.imagePath}
+                src={val.img}
                 width={282}
                 height={186}
                 position={`relative`}
@@ -46,7 +39,7 @@ export const MenuCards = ({ data }: { data: Array<FoodType> }) => {
                   "0px 3px 6px -2px rgba(0, 0, 0, 0.10), 0px 6px 10px 0px rgba(0, 0, 0, 0.07)"
                 }
               ></Box>
-              {val.sale > 0 && (
+              {val.sale && val.sale > 0 && (
                 <Box
                   top={17}
                   left={205}
@@ -69,7 +62,7 @@ export const MenuCards = ({ data }: { data: Array<FoodType> }) => {
                 <Typography fontSize={18} fontWeight={600}>
                   {val.foodName}
                 </Typography>
-                {val.sale > 0 ? (
+                {val.sale && val.sale > 0 ? (
                   <Stack direction={`row`} alignItems={`center`}>
                     <NumericFormat
                       style={styleForSaleCards}

@@ -1,11 +1,34 @@
 import { Button, Stack, useTheme } from "@mui/material";
-import { MenuBtns } from "@/utils/dummy-data";
 import foodData from "@/dummy.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MenuCards } from "./MenuCards";
+import { FoodsDataType } from "@/types/FoodsDataType";
+type ObjType = {
+  _id: string;
+  name: string;
+  __v: number;
+};
 export const MenuBody = () => {
   const theme = useTheme();
   const [category, setCategory] = useState("Breakfast");
+  const [categories, setCategories] = useState<Array<ObjType>>();
+  const [foods, setFoods] = useState<Array<FoodsDataType>>();
+  useEffect(() => {
+    async function getData() {
+      const res = await fetch(`http://localhost:4000/api/category`);
+      const json = await res.json();
+      setCategories(json);
+    }
+    getData();
+  }, []);
+  useEffect(() => {
+    async function getData() {
+      const res = await fetch(`http://localhost:4000/api/food`);
+      const json = await res.json();
+      setFoods(json);
+    }
+    getData();
+  }, []);
   return (
     <Stack
       height={`fit-content`}
@@ -14,10 +37,10 @@ export const MenuBody = () => {
       mt={12}
     >
       <Stack direction={`row`} spacing={3}>
-        {MenuBtns.map((val, index) => {
+        {categories?.map((val, index) => {
           return (
             <Button
-              onClick={() => setCategory(val)}
+              onClick={() => setCategory(val.name)}
               sx={{
                 fontSize: 17,
                 textTransform: `none`,
@@ -34,15 +57,15 @@ export const MenuBody = () => {
               }}
               key={index}
             >
-              {val}
+              {val.name}
             </Button>
           );
         })}
       </Stack>
       <Stack>
         <MenuCards
-          data={foodData.filter((val) => {
-            return val.category == category;
+          data={foods?.filter((val) => {
+            return val.foodCategory == category;
           })}
         />
       </Stack>

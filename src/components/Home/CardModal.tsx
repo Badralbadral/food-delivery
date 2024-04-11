@@ -7,10 +7,9 @@ import {
   styleObj,
   styleForNum,
   styleForSaleNum,
-  // DrawerCardsArr,
-  FoodsDataType,
+  DrawerCardsArr,
 } from "@/utils/dummy-data";
-
+import { FoodsDataType } from "@/types/FoodsDataType";
 export const CardModal = ({
   stateVal,
   func,
@@ -21,7 +20,8 @@ export const CardModal = ({
   data: FoodsDataType | undefined;
 }) => {
   const [quantity, setQuantity] = useState<number>(1);
-  // const changedData = { ...data, count: quantity };
+  const changedData = { ...data, count: quantity };
+
   return (
     <Modal open={stateVal}>
       <Stack
@@ -43,11 +43,13 @@ export const CardModal = ({
             <Typography fontSize={28} fontWeight={700} mb={0.5}>
               {data?.foodName}
             </Typography>
-            {data && data.sale > 0 ? (
+            {data?.sale && data.sale > 0 ? (
               <Stack direction={`row`} alignItems={`center`} spacing={1}>
                 <NumericFormat
                   style={styleForSaleNum}
-                  value={`${data.price - (data.price * data.sale) / 100}`}
+                  value={`${
+                    data.price && data.price - (data.price * data.sale) / 100
+                  }`}
                   thousandSeparator=","
                   suffix="₮"
                 />
@@ -61,7 +63,9 @@ export const CardModal = ({
             ) : (
               <NumericFormat
                 style={styleForSaleNum}
-                value={`${data && data.price - (data.price * data.sale) / 100}`}
+                value={`${
+                  data?.price && data.price - (data.price * data.sale) / 100
+                }`}
                 thousandSeparator=","
                 suffix="₮"
                 disabled
@@ -84,7 +88,7 @@ export const CardModal = ({
               p={`8px`}
               fontSize={16}
             >
-              {data?.ingredients.map((val: string) => {
+              {data?.ingredients?.map((val: string) => {
                 return <Typography key={val}>{val},</Typography>;
               })}
             </Stack>
@@ -110,18 +114,19 @@ export const CardModal = ({
                 {quantity}
               </Typography>
               <Button
-                // onClick={() =>
-                //   setQuantity(data.stock <= quantity ? quantity : quantity + 1)
-                // }
+                onClick={() =>
+                  // setQuantity(data.stock <= quantity ? quantity : quantity + 1)
+                  setQuantity(quantity + 1)
+                }
                 sx={styleObj}
               >
                 +
               </Button>
             </Stack>
             <Button
-              // onClick={() => {
-              //   DrawerCardsArr.push(changedData);
-              // }}
+              onClick={() => {
+                DrawerCardsArr.push(changedData);
+              }}
               sx={{
                 bgcolor: `#18BA51`,
                 height: 40,
