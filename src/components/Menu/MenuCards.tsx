@@ -5,16 +5,20 @@ import { NumericFormat } from "react-number-format";
 import { styleForSCard, styleForSaleCards } from "@/utils/dummy-data";
 import { FoodsDataType } from "@/types/FoodsDataType";
 
-export const MenuCards = ({ data }: { data: Array<FoodsDataType> }) => {
+export const MenuCards = ({
+  data,
+}: {
+  data: Array<FoodsDataType> | undefined;
+}) => {
   const [open, setOpen] = useState<boolean>(false);
   const [selected, setSelected] = useState<number>(0);
-  const sortedData = data.sort((a, b) => {
+  const sortedData = data?.sort((a, b) => {
     return b.sale - a.sale;
   });
   return (
     <Stack width={1170} height={`fit-content`} spacing={`22px`} mt={6}>
       <Stack direction={`row`} flexWrap={`wrap`} width={1290}>
-        {sortedData.map((val, index) => {
+        {sortedData?.map((val, index) => {
           return (
             <Stack
               onClick={() => {
@@ -39,7 +43,7 @@ export const MenuCards = ({ data }: { data: Array<FoodsDataType> }) => {
                   "0px 3px 6px -2px rgba(0, 0, 0, 0.10), 0px 6px 10px 0px rgba(0, 0, 0, 0.07)"
                 }
               ></Box>
-              {val.sale && val.sale > 0 && (
+              {val.sale > 0 && (
                 <Box
                   top={17}
                   left={205}
@@ -93,7 +97,7 @@ export const MenuCards = ({ data }: { data: Array<FoodsDataType> }) => {
         <CardModal
           stateVal={open}
           func={() => setOpen(!open)}
-          data={data[selected]}
+          data={data && data[selected]}
         />
       </Stack>
     </Stack>

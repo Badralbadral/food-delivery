@@ -3,8 +3,8 @@ export type FoodsDataType = {
   foodName?: string;
   img?: string;
   ingredients?: [string];
-  price?: number;
-  sale?: number | undefined;
+  price: number;
+  sale: number;
   stock?: number;
   _id?: string;
   count: number;

@@ -11,7 +11,6 @@ import { Hide } from "@/svgs/HIde";
 import { useState } from "react";
 import { NewPassword, styleForInputBtn } from "@/utils/dummy-data";
 import { useRouter } from "next/router";
-
 export const StepTwo = () => {
   const [hide, setHide] = useState<boolean>(false);
   const [checked, setChecked] = useState(false);
@@ -33,7 +32,7 @@ export const StepTwo = () => {
     const data = await res.json();
     setLoad(false);
     if (data.verified) {
-      router.push("/");
+      setTimeout(() => router.push("/"), 4000);
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
     } else {
@@ -43,7 +42,7 @@ export const StepTwo = () => {
   };
   const alert = (
     <Alert
-      sx={{ width: 500, fontSize: 15, position: `absolute`, top: -47 }}
+      sx={{ width: 510, fontSize: 15, position: `absolute`, top: -47 }}
       severity="error"
     >
       Check your verfication code! Verfication code is does not match!
@@ -131,7 +130,6 @@ export const StepTwo = () => {
                     name={val.name}
                     border={`none`}
                     bgcolor={`#F7F7F8`}
-                    height={32}
                     component={"input"}
                     placeholder="*********"
                   ></Box>

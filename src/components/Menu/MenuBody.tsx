@@ -1,5 +1,4 @@
 import { Button, Stack, useTheme } from "@mui/material";
-import foodData from "@/dummy.json";
 import { useEffect, useState } from "react";
 import { MenuCards } from "./MenuCards";
 import { FoodsDataType } from "@/types/FoodsDataType";
